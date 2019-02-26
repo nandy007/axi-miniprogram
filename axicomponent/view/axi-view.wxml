@@ -1,0 +1,5 @@
+<!--axicomponent/view/axi-view.wxml-->
+<view hoverClass="{{hoverClass}}" 
+  hoverStopPropagation="{{hoverStopPropagation}}"
+  hoverStartTime="{{hoverStartTime}}"
+  hoverStayTime="{{hoverStayTime}}" class="slot-class"><view wx:for="{{list}}">{{item.aaa}}</view><slot></slot></view>

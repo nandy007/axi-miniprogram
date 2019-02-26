@@ -1,0 +1,11 @@
+<!--axicomponent/scroll-view/axi-scroll-view.wxml-->
+<scroll-view scrollX="{{scrollX}}"
+  scrollY="{{scrollY}}"
+  upperThreshold="{{upperThreshold}}"
+  lowerThreshold="{{lowerThreshold}}"
+  enableBackToTop="{{enableBackToTop}}"
+  scrollWithAnimation="{{scrollWithAnimation}}"
+  scrollIntoView="{{scrollIntoView}}" 
+  bindscrolltoupper="scrolltoupperFunc"
+  bindscrolltolower="scrolltolowerFunc"
+  bindscroll="scrollFunc"><slot></slot></scroll-view>

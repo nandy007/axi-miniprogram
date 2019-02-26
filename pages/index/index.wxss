@@ -1,0 +1,12 @@
+/**index.wxss**/
+.container{
+  height: 100%;
+}
+.hoverclass{
+  background-color: red;
+  color: blue;
+}
+.column{
+  display: flex;
+  flex-direction: column;
+}
