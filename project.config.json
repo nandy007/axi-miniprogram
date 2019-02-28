@@ -13,8 +13,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.4.2",
-	"appid": "wx026d5138a0266a39",
-	"projectname": "axicomponent",
+	"appid": "wx255d00547e08b63b",
+	"projectname": "axi-miniprogram",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

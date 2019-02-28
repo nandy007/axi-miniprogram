@@ -1,14 +1,15 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
-Page({
+const PageWrapper = require('../../axicomponent/include.js').Page;
+PageWrapper({
   data: {
     content: ['111', '恭喜你，学会了小程序组件'],
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    scroll: true,
     items: [
               {
                     "url": "http://127.0.0.1/1.flv",

@@ -10,6 +10,7 @@
   },
   "usingComponents": {
     "axi-view": "/axicomponent/view/axi-view",
-    "axi-scroll-view": "/axicomponent/scroll-view/axi-scroll-view"
+    "axi-scroll-view": "/axicomponent/scroll-view/axi-scroll-view",
+    "axi-button": "/axicomponent/button/axi-button"
   }
 }

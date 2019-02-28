@@ -6,36 +6,35 @@ ComponentWrapper({
    * 组件的属性列表
    */
   properties: {
+    'size': {
+      type: String
+    },
+    'type': {
+      type: String
+    },
+    'plain': {
+      type: Boolean
+    },
+    'disabled': {
+      type: Boolean
+    },
+    'loading': {
+      type: Boolean
+    },
     'hoverClass': {
-      type: String,
-      value: 'none',
-      // observer: function (newVal, oldVal) {
-        
-      // }
+      type: String
     },
     'hoverStopPropagation': {
-      type: Boolean,
-      value: false
+      type: Boolean
     },
-    'hoverStartTime': {
-      type: Number,
-      value: 50
-    },
-    'hoverStayTime': {
-      type: Number,
-      value: 400
-    }
+    'hoverStartTime'
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    list: [
-      {
-        aaa: '标题1'
-      }
-    ]
+    
   },
 
   /**

@@ -1,15 +1,13 @@
 // axicomponent/scroll-view/axi-scroll-view.js
-Component({
+const ComponentWrapper = require('../include.js').Component;
+
+ComponentWrapper({
   /**
    * 组件的属性列表
    */
-  options: {
-    addGlobalClass: true,
-  },
   properties: {
     'direction': {
       type: String,
-      value: 'horizontal',
       observer: function (newVal) {
         if (newVal === 'horizontal'){
           this.setData({
@@ -18,7 +16,7 @@ Component({
           });
         }else{
           this.setData({
-            scrollX: false,
+            scrollX: false, 
             scrollY: true
           });
         }

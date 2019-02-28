@@ -1,0 +1,11 @@
+<!--axicomponent/view/axi-button.wxml-->
+<button size="{{size}}" 
+  type="{{type}}"
+  plain="{{plain}}"
+  disabled="{{disabled}}" 
+  loading="{{loading}}"
+  hoverClass="{{hoverClass}}"
+  hoverStopPropagation="{{hoverStopPropagation}}"
+  hoverStartTime="{{hoverStartTime}}"
+  hoverStayTime="{{hoverStayTime}}"
+  class="slot-class"><slot></slot></button>

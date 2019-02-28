@@ -1,17 +1,24 @@
 <!--index.wxml-->
 <axi-view class="container">
-  <axi-scroll-view bindscrolltoupper="scrollTop">
 
-    <!-- <aui-img src="/pages/index/content.png"></aui-img> -->
 
-    <axi-view hoverClass="hoverclass" style="height:1000px;">
-        <view wx:for="{{list}}">{{item.title}}</view>
+<axi-button size="default" type='warn' loading='true'>按钮</axi-button>
+
+  <!-- <axi-scroll-view bindscrolltoupper="scrollTop" direction="horizontal">
+
+
+    <axi-view hoverClass="hoverclass" style="height:1000px;width:1000px;display:block">
+        
     </axi-view>
 
     <axi-view slotClass="column">
       <text>1111</text><text>2222</text>
     </axi-view>
 
-  </axi-scroll-view>
+  </axi-scroll-view> -->
+
+  <!-- <scroll-view scroll-x="{{scroll}}">
+    <view style='height:300px;width:1000px'>ty</view>
+  </scroll-view> -->
 
 </axi-view>
