@@ -46,13 +46,8 @@ function addCommon(opt, isPage){
   properties.modelName = {
     type: String
   };
-
-  var methods = isPage ? opt : (function(){
-    if(opt.methods) return opt.methods;
-    return opt.methods = {};
-  })();
   
-  if(isPage) methods.modelupdate = function(e, params){
+  if(isPage) opt.modelupdate = function(e, params){
     var value = params.value, modelName = params.modelName, checked = params.checked;
     var modelNames = modelName.split('.'), lastName = modelNames.pop(), name, obj = this.data;
     
