@@ -51,7 +51,8 @@ function addCommon(opt, isPage){
     if(opt.methods) return opt.methods;
     return opt.methods = {};
   })();
-  methods.modelupdate = function(e, params){
+  
+  if(isPage) methods.modelupdate = function(e, params){
     var value = params.value, modelName = params.modelName, checked = params.checked;
     var modelNames = modelName.split('.'), lastName = modelNames.pop(), name, obj = this.data;
     
@@ -84,6 +85,7 @@ function addCommon(opt, isPage){
 
 module.exports = {
   Page: function (opt) {
+    addCommon(opt, true);
     Page(opt);
   },
   Component: function (opt) {
