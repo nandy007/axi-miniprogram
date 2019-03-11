@@ -1,0 +1,26 @@
+axi-pick-date{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  min-height:24px;
+  width:100%;
+  overflow: hidden;
+}
+
+picker{
+  position: absolute;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100%;
+  width:100%;
+}
+
+axi-pick-date picker view{
+  height: 1000px;
+  width: 1000px;
+}
+
+axi-pick-date > view{
+  align-self: center;
+}

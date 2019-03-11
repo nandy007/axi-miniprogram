@@ -1,0 +1,16 @@
+<picker
+  mode='date'
+  value="{{val}}" 
+  start="{{spastartce}}"
+  end="{{spastartce}}"
+  fields="{{fields}}"
+  disabled="{{disabled}}"
+  catchchange="bindchangeFunc"
+  bindcancel="bindcancelFunc"
+  class="axi-text">
+  <view></view>
+</picker> 
+<view>{{val}}</view>
+
+
+  

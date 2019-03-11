@@ -1,4 +1,4 @@
-// axicomponent/view/axi-view.js
+// axicomponent/icon/axi-icon.js
 const ComponentWrapper = require('../include.js').Component;
 
 ComponentWrapper({
@@ -6,32 +6,17 @@ ComponentWrapper({
    * 组件的属性列表
    */
   properties: {
-    'size': {
+    'value': {
       type: String
-    },
-    'type': {
-      type: String
-    },
-    'plain': {
-      type: Boolean
     },
     'disabled': {
       type: Boolean
     },
-    'loading': {
+    'checked': {
       type: Boolean
     },
-    'hoverClass': {
+    'color': {
       type: String
-    },
-    'hoverStopPropagation': {
-      type: Boolean
-    },
-    'hoverStartTime':{
-      type: Number
-    },
-    'hoverStayTime': {
-      type: Number
     }
   },
 
@@ -46,8 +31,6 @@ ComponentWrapper({
    * 组件的方法列表
    */
   methods: {
-    // toDo: function(){
-
-    // }
+    
   }
 })

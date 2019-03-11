@@ -1,0 +1,5 @@
+<icon 
+  type="{{type}}" 
+  size="{{size}}"
+  color="{{color}}">
+</icon>

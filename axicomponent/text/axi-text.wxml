@@ -1,0 +1,13 @@
+<text v-if="{{text}}"
+  selectable="{{selectable}}" 
+  space="{{space}}"
+  class="axi-text">
+  {{text}}
+</text>
+
+<rich-text v-else
+  nodes="{{html}}"
+  space="{{space}}">
+</rich-text>
+
+  

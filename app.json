@@ -11,6 +11,15 @@
   "usingComponents": {
     "axi-view": "/axicomponent/view/axi-view",
     "axi-scroll-view": "/axicomponent/scroll-view/axi-scroll-view",
-    "axi-button": "/axicomponent/button/axi-button"
+    "axi-button": "/axicomponent/button/axi-button",
+    "axi-text": "/axicomponent/text/axi-text",
+    "axi-progress": "/axicomponent/progress/axi-progress",
+    "axi-icon": "/axicomponent/icon/axi-icon",
+    "axi-checkbox": "/axicomponent/checkbox/axi-checkbox",
+    "axi-checkbox-group": "/axicomponent/checkbox/axi-checkbox-group",
+    "axi-swiper": "/axicomponent/swiper/axi-swiper",
+    "axi-swiper-item": "/axicomponent/swiper/axi-swiper-item",
+    "axi-pick-date": "/axicomponent/picker/axi-pick-date",
+    "axi-pick-time": "/axicomponent/picker/axi-pick-time"
   }
 }

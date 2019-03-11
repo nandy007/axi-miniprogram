@@ -1,0 +1,13 @@
+<!--axicomponent/view/axi-button.wxml-->
+<progress 
+  showInfo="{{showInfo}}" 
+  borderRadius="{{borderRadius}}"
+  fontSize="{{fontSize}}"
+  strokeWidth="{{strokeWidth}}" 
+  activeColor="{{activeColor}}" 
+  backgroundColor="{{backgroundColor}}" 
+  active="{{active}}" 
+  activeMode="{{activeMode}}" 
+  percent="{{percent}}"
+  bindactiveend="activeendFunc">
+</progress>

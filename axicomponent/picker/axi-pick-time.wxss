@@ -1,0 +1,25 @@
+axi-pick-time{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  min-height:24px;
+  width:100%;
+  overflow: hidden;
+}
+
+picker{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width:100%;
+}
+
+axi-pick-time picker view{
+  height: 1000px;
+  width: 1000px;
+}
+
+axi-pick-time > view{
+  align-self: center;
+}

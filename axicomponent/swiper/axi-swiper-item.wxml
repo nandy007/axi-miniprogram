@@ -1,0 +1,4 @@
+<swiper-item 
+  class="slot-class"><slot></slot></swiper-item>
+
+

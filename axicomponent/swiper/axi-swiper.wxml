@@ -1,0 +1,26 @@
+<swiper 
+  type="{{type}}"
+  vertical="{{vertical}}"
+  autoplay="{{autoplay}}" 
+  interval="{{interval}}"
+  current="{{current}}"
+  currentItemId="{{currentItemId}}"
+  indicatorDots="{{indicatorDots}}"
+  indicatorColor="{{indicatorColor}}"
+  indicatorActiveColor="{{indicatorActiveColor}}"
+  class="slot-class">
+
+  <slot></slot>
+  <!-- <swiper-item>
+    <view style='background:red;height:100%;width:100%'></view>
+  </swiper-item>
+
+  <swiper-item>
+    <view style='background:green;height:100%;width:100%'></view>
+  </swiper-item>
+
+  <swiper-item>
+    <view style='background:blue;height:100%;width:100%'></view>
+  </swiper-item> -->
+  
+  </swiper>

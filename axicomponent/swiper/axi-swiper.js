@@ -1,4 +1,4 @@
-// axicomponent/view/axi-view.js
+// axicomponent/swiper/axi-swiper.js
 const ComponentWrapper = require('../include.js').Component;
 
 ComponentWrapper({
@@ -6,32 +6,33 @@ ComponentWrapper({
    * 组件的属性列表
    */
   properties: {
-    'size': {
-      type: String
-    },
     'type': {
       type: String
     },
-    'plain': {
+    'vertical': {
       type: Boolean
     },
-    'disabled': {
+    'autoplay': {
       type: Boolean
     },
-    'loading': {
-      type: Boolean
+    'interval': {
+      type: Number,
+      value: 5000
     },
-    'hoverClass': {
+    'current': {
+      type: Number
+    },
+    'currentItemId': {
       type: String
     },
-    'hoverStopPropagation': {
-      type: Boolean
-    },
-    'hoverStartTime':{
+    'indicatorDots':{
       type: Number
     },
-    'hoverStayTime': {
-      type: Number
+    'indicatorColor': {
+      type: String
+    },
+    'indicatorActiveColor': {
+      type: String
     }
   },
 

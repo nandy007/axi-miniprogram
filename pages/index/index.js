@@ -24,7 +24,8 @@ PageWrapper({
       {
         title: '标题二'
       }
-    ]
+    ],
+    node: '<span >1111</span>'
   },
   onLoad: function () {
     // console.log(222)
@@ -38,5 +39,14 @@ PageWrapper({
   },
   scroll: function (e) {
     console.log(e);
+  },
+  actived: function(e){
+    console.log(e)
+  },
+  change : function(e){
+    console.log(e)
+  },
+  cancel: function(e){
+    console.log(e)
   }
 })
