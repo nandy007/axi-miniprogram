@@ -1,0 +1,8 @@
+<!--axicomponent/textarea/axi-textarea.wxml-->
+<textarea value="{{value}}" 
+  placeholder="{{placeholder}}"
+  disabled="{{disabled}}"
+  maxlength="{{maxlength}}"
+  placeholder-style="{{placeholderColor}}"
+  auto-height="{{autoHeight}}"
+  focus="{{focus}}" bindblur="blurFunc" bindfocus="focusFunc" bindlinechange="linechangeFunc" bindinput="inputFunc" bindconfirm="confirmFunc"></textarea>

@@ -1,0 +1,11 @@
+<!--axicomponent/input/axi-input.wxml-->
+<input value="{{value}}" 
+  type="{{type}}"
+  password="{{password}}"
+  placeholder="{{placeholder}}"
+  disabled="{{disabled}}"
+  maxlength="{{maxlength}}"
+  placeholder-style="{{placeholderColor}}"
+  confirm-type="{{confirmType}}"
+  focus="{{focus}}" bindblur="blurFunc" bindfocus="focusFunc" bindinput="inputFunc" bindconfirm="confirmFunc"></input>
+
