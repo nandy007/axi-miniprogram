@@ -1,5 +1,7 @@
 // axicomponent/textarea/axi-textarea.js
-Component({
+const ComponentWrapper = require('../include.js').Component;
+
+ComponentWrapper({
   /**
    * 组件的属性列表
    */
