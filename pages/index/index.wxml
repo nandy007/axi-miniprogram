@@ -1,10 +1,12 @@
 <!--index.wxml-->
 <axi-view class="container">
 
+<!-- <axi-view wx:if="{{isShow}}"><checkbox></checkbox></axi-view>
+
 <axi-text  text="333" selectable="true"></axi-text>
 
-<axi-button size="default" type='warn' loading='true'>按钮</axi-button>
-<axi-progress percent='30' showInfo='true' fontSize="20" bindactiveend="actived" active="false"></axi-progress>
+<axi-button  size="default" type='warn' loading='true'>按钮</axi-button>
+<axi-progress percent='30' showInfo='true' fontSize="20" bindactiveend="actived" active="false"></axi-progress> -->
 <!-- <axi-icon type='success' size="55px" color=''></axi-icon> -->
 
 <!-- <axi-swiper>
@@ -32,16 +34,31 @@
   
 
 
-<!-- 
-<axi-checkbox-group>
-  
-</axi-checkbox-group> -->
 
-<label>
-  <axi-checkbox></axi-checkbox>
-  <checkbox></checkbox>
+
+  <axi-label for="ck1">
+    <axi-checkbox id="ck1" value="1" color="red" bindchange="change"></axi-checkbox>
+    <text>篮球</text>
+  </axi-label>
+  <axi-label for="ck2">
+    <axi-checkbox id="ck2" value="2" bindchange="change"></axi-checkbox>
+    <text>足球</text>
+  </axi-label>
+  
+  <axi-label for="rd1">
+    <axi-radio name="rd" id="rd1" value="1" color="red" bindchange="change" checked='true'></axi-radio>
+    <text>中国</text>
+  </axi-label>
+  <axi-label for="rd2">
+    <axi-radio name="rd" id="rd2" value="2" color="red" bindchange="change"></axi-radio>
+    <text>美国</text>
+  </axi-label>
+
+  <navigator url='../main/main' open-type="navigate"><text>main</text></navigator>
+
+
   <!-- <text>3333</text> -->
-</label>
+
 
 
 

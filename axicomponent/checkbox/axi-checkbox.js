@@ -13,9 +13,19 @@ ComponentWrapper({
       type: Boolean
     },
     'checked': {
-      type: Boolean
+      type: Boolean,
+      value: false,
+      observer: function(v){
+        this.triggerEvent('change', {
+          checked: v,
+          value: this.data.value
+        });
+      }
     },
     'color': {
+      type: String
+    },
+    'name': {
       type: String
     }
   },
@@ -31,6 +41,10 @@ ComponentWrapper({
    * 组件的方法列表
    */
   methods: {
-    
+    click: function(e){
+      this.setData({
+        checked: !this.data.checked
+      });
+    }
   }
 })

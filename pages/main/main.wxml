@@ -1,0 +1,12 @@
+<!--pages/main/main.wxml-->
+<text>pages/main/main.wxml</text>
+<text>{{text}}</text>
+<axi-checkbox name="ck" value="1" color="red" bindchange="change"></axi-checkbox>
+  <axi-label for="rd1">
+    <axi-radio name="rd" id="rd1" value="1" color="red" bindchange="change" checked='true'></axi-radio>
+    <text>中国</text>
+  </axi-label>
+  <axi-label for="rd2">
+    <axi-radio name="rd" id="rd2" value="2" color="red" bindchange="change"></axi-radio>
+    <text>美国</text>
+  </axi-label>

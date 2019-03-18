@@ -1,0 +1,6 @@
+<!--axicomponent/radio/axi-radio.wxml-->
+<view catchtap="click"><radio
+  value="{{value}}" id="{{name}}"
+  disabled="{{disabled}}"
+  checked="{{checked}}"
+  color="{{color}}"/></view>

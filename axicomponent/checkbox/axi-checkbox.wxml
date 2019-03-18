@@ -1,11 +1,12 @@
-<!-- <checkbox id='aa'
-  value="{{value}}" 
+
+  <view catchtap="click"><checkbox
+  value="{{value}}"
   disabled="{{disabled}}"
   checked="{{checked}}"
-  color="{{color}}"/> -->
+  color="{{color}}"/></view>
 
-  <!-- </checkbox> -->
-  <text>444</text>
+
+
 
 
 

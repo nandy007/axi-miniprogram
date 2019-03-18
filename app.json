@@ -1,12 +1,13 @@
 {
-  "pages":[
-    "pages/index/index"
+  "pages": [
+    "pages/index/index",
+    "pages/main/main"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "usingComponents": {
     "axi-view": "/axicomponent/view/axi-view",
@@ -16,10 +17,11 @@
     "axi-progress": "/axicomponent/progress/axi-progress",
     "axi-icon": "/axicomponent/icon/axi-icon",
     "axi-checkbox": "/axicomponent/checkbox/axi-checkbox",
-    "axi-checkbox-group": "/axicomponent/checkbox/axi-checkbox-group",
+    "axi-radio": "/axicomponent/radio/axi-radio",
     "axi-swiper": "/axicomponent/swiper/axi-swiper",
     "axi-swiper-item": "/axicomponent/swiper/axi-swiper-item",
     "axi-pick-date": "/axicomponent/picker/axi-pick-date",
-    "axi-pick-time": "/axicomponent/picker/axi-pick-time"
+    "axi-pick-time": "/axicomponent/picker/axi-pick-time",
+    "axi-label": "/axicomponent/label/axi-label"
   }
 }
