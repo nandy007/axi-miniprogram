@@ -1,5 +1,5 @@
 // axicomponent/swiper/axi-swiper-item.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-swiper-item').Component;
 
 ComponentWrapper({
   /**

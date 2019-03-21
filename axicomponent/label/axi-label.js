@@ -1,5 +1,5 @@
 // axicomponent/label/axi-label.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-label').Component;
 ComponentWrapper({
   /**
    * 组件的属性列表
@@ -27,7 +27,7 @@ ComponentWrapper({
 
       var comp = this.selectById(id);
 
-      if (comp) comp.click();
+      if (comp) comp.click && comp.click();
     }
   }
 })

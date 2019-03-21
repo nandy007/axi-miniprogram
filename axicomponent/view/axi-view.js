@@ -1,5 +1,5 @@
 // axicomponent/view/axi-view.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-view').Component;
 
 ComponentWrapper({
   /**

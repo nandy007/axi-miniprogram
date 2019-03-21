@@ -1,5 +1,5 @@
 // axicomponent/switch/axi-switch.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-switch').Component;
 
 ComponentWrapper({
   /**
@@ -32,7 +32,15 @@ ComponentWrapper({
    */
   methods: {
     changeFunc: function(e) {
-      this.triggerEvent('change', arguments);
+      this.setData({
+        checked: e.detail.value
+      });
+      this.triggerEvent('change', e.detail);
+    },
+    click: function () {
+      this.setData({
+        checked: !this.data.checked
+      });
     }
   }
 })

@@ -1,5 +1,5 @@
 // axicomponent/progress/axi-progress.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-progress').Component;
 
 ComponentWrapper({
   /**

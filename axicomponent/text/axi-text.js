@@ -1,5 +1,5 @@
 // axicomponent/text/axi-text.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-text').Component;
 
 ComponentWrapper({
   /**

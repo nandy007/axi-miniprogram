@@ -1,7 +1,8 @@
 // axicomponent/picker/axi-pick-date.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-pick-time').Component;
 
 ComponentWrapper({
+  formType: 'select',
   /**
    * 组件的属性列表
    */
@@ -9,9 +10,7 @@ ComponentWrapper({
     'value': {
       type: String,
       observer(val){
-        this.setData({
-          val: val
-        });
+        this.calculateShow();
       }
     },
     'start': {
@@ -22,6 +21,12 @@ ComponentWrapper({
     },
     'disabled': {
       type: Boolean
+    },
+    'placeholder': {
+      type: String,
+      observer: function (val) {
+        this.calculateShow();
+      }
     }
   },
 
@@ -29,21 +34,26 @@ ComponentWrapper({
    * 组件的初始数据
    */
   data: {
-    val: ''
+    showText: ''
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    bindchangeFunc(e){
+    calculateShow: function () {
       this.setData({
-        val: e.detail.value
+        showText: this.data.value || this.data.placeholder
       });
-      this.triggerEvent('change', arguments);
     },
-    bindcancelFunc(e){
-      this.triggerEvent('cancel', arguments);
+    bindchangeFunc(e) {
+      this.setData({
+        value: e.detail.value
+      });
+      this.triggerEvent('change', e.detail);
+    },
+    bindcancelFunc(e) {
+      this.triggerEvent('cancel', e.detail);
     }
   }
 })

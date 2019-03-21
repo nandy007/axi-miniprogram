@@ -1,4 +1,0 @@
-<!--axicomponent/select/axi-select.wxml-->
-  <picker mode="selector" value="{{value}}" range="{{range}}" disabled="{{disabled}}" bindchange="changeFunc" bindcancle="cancleFunc">
-  <slot></slot>
-  </picker>

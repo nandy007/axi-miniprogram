@@ -4,7 +4,7 @@ function getId(){
   return index++;
 }
 
-const PageWrapper = require('../../axicomponent/include.js').Page;
+const PageWrapper = require('../../axicomponent/include.js')('main').Page;
 PageWrapper({
 
   /**

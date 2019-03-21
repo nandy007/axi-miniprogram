@@ -1,0 +1,13 @@
+<!--axicomponent/picker/axi-select.wxml-->
+<picker mode="selector" range-key="text" 
+disabled="{{disabled}}"
+value="{{index}}"
+range="{{range}}"
+bindchange="change"
+bindcancel="cancel"
+>
+  <view>
+    {{showText}}
+  </view>
+</picker>
+

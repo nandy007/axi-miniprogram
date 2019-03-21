@@ -1,2 +1,2 @@
 <!--axicomponent/switch/axi-switch.wxml-->
-<switch checked="{{checked}}" type="{{type}}" disabled="{{disabled}}" bindchange="changeFunc" />
+<switch checked="{{checked}}" color="{{color}}" disabled="{{disabled}}" bindchange="changeFunc" />

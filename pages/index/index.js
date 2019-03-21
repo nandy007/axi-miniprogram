@@ -1,9 +1,11 @@
 //index.js
 //获取应用实例
 
-const PageWrapper = require('../../axicomponent/include.js').Page;
+const PageWrapper = require('../../axicomponent/include.js')('index').Page;
 PageWrapper({
   data: {
+    switchChecked: true,
+    aa: '222',
     isShow: true,
     content: ['111', '恭喜你，学会了小程序组件'],
     motto: 'Hello World',
@@ -12,6 +14,7 @@ PageWrapper({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     scroll: true,
     cks: ['1'],
+    options: [{ text: '选项1', value: '1' }, { text: '选项2', value: '2' }],
     items: [
               {
                     "url": "http://127.0.0.1/1.flv",
@@ -37,8 +40,10 @@ PageWrapper({
     // this.data.isShow = true;
     setTimeout(()=>{
       this.setData({
-        isShow: false
+        isShow: false,
+        switchChecked: false
       });
+
       setTimeout(() => {
         this.setData({
           isShow: true

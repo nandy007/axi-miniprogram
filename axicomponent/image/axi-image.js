@@ -1,5 +1,5 @@
 // axicomponent/image/axi-image.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-image').Component;
 
 ComponentWrapper({
   /**

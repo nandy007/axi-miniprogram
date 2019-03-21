@@ -1,5 +1,5 @@
 // axicomponent/textarea/axi-textarea.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-textarea').Component;
 
 ComponentWrapper({
   /**
@@ -61,6 +61,11 @@ ComponentWrapper({
     },
     confirmFunc: function(e) {
         this.triggerEvent('confirm', arguments);
+    },
+    click: function () {
+      this.setData({
+        focus: true
+      });
     }
   }
 })

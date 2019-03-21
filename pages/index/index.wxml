@@ -34,7 +34,15 @@
   
 
 
+  <axi-input placeholder="请输入" modelName="aa" modelValue="{{aa}}" bindmodelupdate="modelupdate"></axi-input>
 
+  <axi-select placeholder="请选择" options="{{options}}" value="2"></axi-select>
+
+  <axi-pick-date placeholder="请选择"></axi-pick-date>
+
+  <axi-pick-time placeholder="请选择"></axi-pick-time>
+
+  <axi-switch checked="{{switchChecked}}"></axi-switch>
 
   <axi-label for="ck1">
     <axi-checkbox id="ck1" value="1" color="red" bindchange="change"></axi-checkbox>

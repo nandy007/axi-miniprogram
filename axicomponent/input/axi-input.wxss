@@ -1,1 +1,5 @@
 /* axicomponent/input/axi-input.wxss */
+axi-input{
+  width: 100%;
+  height: 30px;
+}

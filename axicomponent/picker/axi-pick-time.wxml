@@ -1,15 +1,15 @@
 <picker
   mode='time'
-  value="{{val}}" 
-  start="{{spastartce}}"
-  end="{{spastartce}}"
+  value="{{value}}" 
+  start="{{start}}"
+  end="{{end}}"
   disabled="{{disabled}}"
   catchchange="bindchangeFunc"
   bindcancel="bindcancelFunc"
-  class="axi-text">
-  <view></view>
+>
+  <view>{{showText}}</view>
 </picker> 
-<view>{{val}}</view>
+
 
 
   

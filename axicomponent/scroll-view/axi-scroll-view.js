@@ -1,5 +1,5 @@
 // axicomponent/scroll-view/axi-scroll-view.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-scroll-view').Component;
 
 ComponentWrapper({
   /**

@@ -129,11 +129,15 @@ function addCompLifetimes(opt) {
   });
 }
 
-function addMethods(opt, isPage){
-  var methods = isPage ? opt : (function(){
+function getMethods(opt, isPage){
+  var methods = isPage ? opt : (function () {
     return opt.methods = opt.methods || {};
   })();
+  return methods;
+}
 
+function addMethods(opt, isPage){
+  var methods = getMethods(opt, isPage);
 
   methods.selectById = function(id){
     var pageCache = app.globalData.pageCache;
@@ -149,6 +153,9 @@ function addMethods(opt, isPage){
     var pageCache = app.globalData.pageCache;
     var comps = pageCache.selectBySelector(selector);
     return isFirst ? comps[0] : comps;
+  };
+  methods.getAttrValue = function(attrName){
+    return this.data[attrName];
   };
 }
 
@@ -202,21 +209,96 @@ function addValueOberser(opt) {
 }
 
 
+function bindModelHandler(opt, isPage){
 
-module.exports = {
-  Page: function(opt) {
-    addPageLifetimes(opt);
-    addMethods(opt);
-    Page(opt);
-  },
-  Component: function(opt) {
-    opt.externalClasses = ['slot-class'];
-    opt.options = {
-      addGlobalClass: true
+  if (isPage || opt.formType === 'form'){
+    var methods = getMethods(opt, isPage);
+    methods.modelupdate = function (e) {
+      var detail = e.detail, modelName = detail.modelName, modelValue = detail.modelValue;
+      var obj = {};
+      obj[modelName] = modelValue;
+      this.setData(obj);
     };
-    addCompLifetimes(opt);
-    addValueOberser(opt);
-    addMethods(opt);
-    Component(opt);
+  }
+
+  var defaultHander = {
+    modelName: {
+      // memo: 'model对应对象属性名',
+      type: String
+    },
+    modelValue: {
+      // memo: 'model对应对象属性值',
+      type: String,
+      value: '',
+      observer: function (v, o) {
+        this.setData({
+          value: v
+        });
+      }
+    }
+  };
+
+  var handler = {
+    input: defaultHander,
+    textarea: defaultHander,
+    checkbox: {
+      modelName: defaultHander.modelName,
+      modelValue: {
+        // memo: 'model对应对象属性值',
+        type: Object,
+        value: [],
+        observer: function (v, o) {
+          this.setData({
+            checked: v.indexOf(this.data.value) > 0
+          });
+        }
+      }
+    },
+    radio: {
+      modelName: defaultHander.modelName,
+      modelValue: {
+        // memo: 'model对应对象属性值',
+        type: String,
+        value: '',
+        observer: function (v, o) {
+          this.setData({
+            checked: v === this.data.value
+          });
+        }
+      }
+    },
+    select: defaultHander
+  };
+
+  if (handler[opt.formType]){
+    var properties = opt.properties = opt.properties || {};
+    Object.assign(properties, handler[opt.formType]);
+  }
+
+  
+}
+
+
+
+module.exports = function(tagName){
+  return {
+    Page: function (opt) {
+      addPageLifetimes(opt);
+      addMethods(opt);
+      bindModelHandler(opt, true);
+      Page(opt);
+    },
+    Component: function (opt) {
+      opt.tagName = tagName;
+      opt.externalClasses = ['slot-class'];
+      opt.options = {
+        addGlobalClass: true
+      };
+      addCompLifetimes(opt);
+      addValueOberser(opt);
+      addMethods(opt);
+      bindModelHandler(opt);
+      Component(opt);
+    }
   }
 };

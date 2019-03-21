@@ -1,5 +1,5 @@
 // axicomponent/radio/axi-radio.js
-const ComponentWrapper = require('../include.js').Component;
+const ComponentWrapper = require('../include.js')('axi-radio').Component;
 const app = getApp();
 function common(){
   
@@ -13,6 +13,7 @@ function common(){
 }
 
 ComponentWrapper({
+  formType: 'radio',
   /**
    * 组件的属性列表
    */
