@@ -2,7 +2,6 @@
 const ComponentWrapper = require('../include.js')('axi-pick-time').Component;
 
 ComponentWrapper({
-  formType: 'select',
   /**
    * 组件的属性列表
    */

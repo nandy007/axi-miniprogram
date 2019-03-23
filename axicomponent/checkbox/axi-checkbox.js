@@ -2,7 +2,6 @@
 const ComponentWrapper = require('../include.js')('axi-checkbox').Component;
 
 ComponentWrapper({
-  formType: 'checkbox',
   /**
    * 组件的属性列表
    */

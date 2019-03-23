@@ -8,4 +8,4 @@
   scrollIntoView="{{scrollIntoView}}" 
   bindscrolltoupper="scrolltoupperFunc"
   bindscrolltolower="scrolltolowerFunc"
-  bindscroll="scrollFunc"><slot></slot></scroll-view>
+  bindscroll="scrollFunc" class="slot-class"><slot></slot></scroll-view>

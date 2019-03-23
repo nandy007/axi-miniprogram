@@ -1,7 +1,6 @@
 // axicomponent/picker/axi-select.js
 const ComponentWrapper = require('../include.js')('axi-select').Component;
 ComponentWrapper({
-  formType: 'select',
   /**
    * 组件的属性列表
    */

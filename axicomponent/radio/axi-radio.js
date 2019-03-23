@@ -13,7 +13,6 @@ function common(){
 }
 
 ComponentWrapper({
-  formType: 'radio',
   /**
    * 组件的属性列表
    */
@@ -28,6 +27,7 @@ ComponentWrapper({
       type: Boolean,
       value: false,
       observer: function (v, o) {
+
         this.triggerEvent('change', {
           checked: v,
           value: this.data.value

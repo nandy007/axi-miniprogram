@@ -1,4 +1,4 @@
 <!--axicomponent/label/axi-label.wxml-->
-<view catchtap="click">
+<view catchtap="click" class="slot-class">
   <slot></slot>
 </view>

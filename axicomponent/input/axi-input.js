@@ -2,7 +2,6 @@
 const ComponentWrapper = require('../include.js')('axi-input').Component;
 
 ComponentWrapper({
-  formType: 'input',
   /**
    * 组件的属性列表
    */
@@ -61,14 +60,16 @@ ComponentWrapper({
         this.triggerEvent('focus', e.detail);
     },
     blurFunc: function(e) {
+      this.setData({
+        value: e.detail.value
+      });
       this.triggerEvent('blur', e.detail);
     },
     inputFunc: function(e) {
-      this.triggerEvent('input', e.detail);
-      this.triggerEvent('modelupdate', {
-        modelName: this.data.modelName,
-        modelValue: e.detail.value
+      this.setData({
+        value: e.detail.value
       });
+      this.triggerEvent('input', e.detail);
     },
     confirmFunc: function(e) {
         this.triggerEvent('confirm', e.detail);

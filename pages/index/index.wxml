@@ -34,9 +34,9 @@
   
 
 
-  <axi-input placeholder="请输入" modelName="aa" modelValue="{{aa}}" bindmodelupdate="modelupdate"></axi-input>
+  <axi-input placeholder="请输入" v-model:text="inputText"></axi-input>
 
-  <axi-select placeholder="请选择" options="{{options}}" value="2"></axi-select>
+  <axi-select placeholder="请选择" v-model:select="slt" options="{{options}}"></axi-select>
 
   <axi-pick-date placeholder="请选择"></axi-pick-date>
 
@@ -45,20 +45,20 @@
   <axi-switch checked="{{switchChecked}}"></axi-switch>
 
   <axi-label for="ck1">
-    <axi-checkbox id="ck1" value="1" color="red" bindchange="change"></axi-checkbox>
+    <axi-checkbox id="ck1" v-model:checkbox="cks" value="1" color="red" bindchange="change"></axi-checkbox>
     <text>篮球</text>
   </axi-label>
   <axi-label for="ck2">
-    <axi-checkbox id="ck2" value="2" bindchange="change"></axi-checkbox>
+    <axi-checkbox id="ck2" v-model:checkbox="cks" value="2" bindchange="change"></axi-checkbox>
     <text>足球</text>
   </axi-label>
   
   <axi-label for="rd1">
-    <axi-radio name="rd" id="rd1" value="1" color="red" bindchange="change" checked='true'></axi-radio>
+    <axi-radio name="rd" id="rd1" value="cn" color="red" bindchange="change" v-model:radio="rd"></axi-radio>
     <text>中国</text>
   </axi-label>
   <axi-label for="rd2">
-    <axi-radio name="rd" id="rd2" value="2" color="red" bindchange="change"></axi-radio>
+    <axi-radio name="rd" id="rd2" value="am" color="red" bindchange="change" v-model:radio="rd"></axi-radio>
     <text>美国</text>
   </axi-label>
 

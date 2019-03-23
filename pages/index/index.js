@@ -4,6 +4,10 @@
 const PageWrapper = require('../../axicomponent/include.js')('index').Page;
 PageWrapper({
   data: {
+    inputText: '输入框的内容',
+    rd: 'cn',
+    cks: ['2'],
+    slt: '2',
     switchChecked: true,
     aa: '222',
     isShow: true,
@@ -39,10 +43,14 @@ PageWrapper({
     // })
     // this.data.isShow = true;
     setTimeout(()=>{
+      console.log(this.data.slt)
       this.setData({
         isShow: false,
-        switchChecked: false
+        switchChecked: false,
+        inputText: '新输入内容'
       });
+
+      // this.data.inputText = '33333'
 
       setTimeout(() => {
         this.setData({
@@ -67,7 +75,7 @@ PageWrapper({
     console.log(e)
   },
   change : function(e){
-    console.log(e.detail)
+    // console.log(e.detail)
   },
   cancel: function(e){
     console.log(e)

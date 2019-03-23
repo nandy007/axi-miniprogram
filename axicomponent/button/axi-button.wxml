@@ -8,4 +8,4 @@
   hoverStopPropagation="{{hoverStopPropagation}}"
   hoverStartTime="{{hoverStartTime}}"
   hoverStayTime="{{hoverStayTime}}"
-  class="slot-class"><slot></slot></button>
+  class="slot-class" class="slot-class"><slot></slot></button>

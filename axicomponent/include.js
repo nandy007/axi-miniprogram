@@ -10,7 +10,7 @@ function delay(cb){
 }
 
 function createPageCache(ctx) {
-  var _names = {}, _all = [];
+  var _names = {}, _all = [], _models = {};
   var _idCache = {};
   
   var util = {
@@ -67,6 +67,38 @@ function createPageCache(ctx) {
         comps = comps.concat(Array.prototype.slice.call(comp));
       }
       return comps;
+    },
+    setData: function(){
+      ctx.setData.apply(ctx, arguments);
+    },
+    registerModel: function(exp, cb){
+      // var observers = ctx.observers = ctx.observers || {};
+      // var observer = observers[exp];
+      // observers[exp] = function(v){
+      //   observer && observer.apply(this, arguments);
+      //   cb && cb(v);
+      // };
+      var cbs = _models[exp] = _models[exp] || [];
+      cbs.push(cb);
+      return this.getValueFromModel(exp);
+    },
+    getValueFromModel: function(exp){
+      var cur, exps = exp.split('.'), e, data = ctx.data;
+      while(e = exps.shift()){
+        cur = data[e];
+      }
+      return cur;
+    },
+    updateModel: function(exp, val){
+      var obj = {};
+      obj[exp] = val;
+      ctx.setData(obj, true);
+    },
+    triggerModelUpdate: function(exp, v){
+      var cbs = _models[exp] = _models[exp] || [];
+      cbs.forEach((cb)=>{
+        cb(v);
+      });
     }
   };
 
@@ -76,7 +108,19 @@ function createPageCache(ctx) {
 function addPageLifetimes(opt) {
   var onLoad = opt.onLoad;
   opt.onLoad = function() {
-    this.pageCache = app.globalData.pageCache = createPageCache(this);
+    var pageCache = this.pageCache = app.globalData.pageCache = createPageCache(this);
+    
+    // 重写page的setData
+    var setData = this.setData;
+    this.setData = function (data, noTrigger) {
+      if (!noTrigger){
+        for (var exp in data) {
+          pageCache.triggerModelUpdate(exp, data[exp]);
+        }
+      }
+      setData.apply(this, arguments);
+    };
+
     onLoad && onLoad.call(this);
   };
   var events = ['onShow', 'onUnload'];
@@ -114,6 +158,16 @@ function addCompLifetimes(opt) {
   opt.created = function(){
     var pageCache = app.globalData.pageCache;
     pageCache.all(this);
+    
+    // 重写comp的triggerEvent
+    var triggerEvent = this.triggerEvent;
+    this.triggerEvent = function (name, params) {
+      triggerEvent.apply(this, arguments);
+      if (['input', 'blur', 'change'].indexOf(name) > -1) {
+        this.__modelHandler && this.__modelHandler(params||{});
+      }
+    };
+
     created && created.call(this);
   };
 
@@ -209,70 +263,132 @@ function addValueOberser(opt) {
 }
 
 
-function bindModelHandler(opt, isPage){
+function bindModelHandler(opt){
 
-  if (isPage || opt.formType === 'form'){
-    var methods = getMethods(opt, isPage);
-    methods.modelupdate = function (e) {
-      var detail = e.detail, modelName = detail.modelName, modelValue = detail.modelValue;
-      var obj = {};
-      obj[modelName] = modelValue;
-      this.setData(obj);
-    };
-  }
+  var properties = opt.properties = opt.properties || {};
 
-  var defaultHander = {
-    modelName: {
-      // memo: 'model对应对象属性名',
-      type: String
-    },
-    modelValue: {
-      // memo: 'model对应对象属性值',
-      type: String,
-      value: '',
-      observer: function (v, o) {
-        this.setData({
-          value: v
+  var models = {
+    text: {
+      init: function(){
+        var pageCache = app.globalData.pageCache, comp = this;
+
+        var modelVal = pageCache.registerModel(comp.data[comp.__modelAttrName], function(n){
+          comp.setData({
+            value: n
+          });
         });
+
+        comp.setData({
+          value: modelVal
+        });
+      },
+      handler: function (params){
+        var pageCache = app.globalData.pageCache, comp = this;
+        var modelAttrName = comp.__modelAttrName;
+        var exp = comp.data[modelAttrName];
+        pageCache.updateModel(exp, params.value);
+      }
+    },
+    checkbox: {
+      init: function(){
+        var pageCache = app.globalData.pageCache, comp = this;
+
+        var modelVal = pageCache.registerModel(comp.data[comp.__modelAttrName], function (n) {
+          comp.setData({
+            checked: n.indexOf(comp.data.value) > -1
+          });
+        });
+
+
+        comp.setData({
+          checked: modelVal.indexOf(comp.data.value) > -1
+        });
+      },
+      handler: function (params){
+        var pageCache = app.globalData.pageCache, comp = this;
+        var modelAttrName = comp.__modelAttrName;
+        var exp = comp.data[modelAttrName], modelValue = pageCache.getValueFromModel(exp).slice(0);
+        if(params.checked){
+          if (modelValue.indexOf(params.value) < 0) modelValue.push(params.value);
+        }else{
+          var index = modelValue.indexOf(params.value);
+          if (index>-1) modelValue.splice(index, 1);
+        }
+        pageCache.updateModel(exp, modelValue);
+      }
+    },
+    radio: {
+      init: function(){
+        var pageCache = app.globalData.pageCache, comp = this;
+
+        var modelVal = pageCache.registerModel(comp.data[comp.__modelAttrName], function (n) {
+          comp.setData({
+            checked: n===comp.data.value
+          });
+        });
+
+        comp.setData({
+          checked: modelVal === comp.data.value
+        });
+      },
+      handler: function (params){
+       
+        if(!params.checked) return;
+        var pageCache = app.globalData.pageCache, comp = this;
+        var modelAttrName = comp.__modelAttrName;
+        var exp = comp.data[modelAttrName];
+        
+        pageCache.updateModel(exp, params.value);
+      }
+    },
+    select: {
+      init: function(){
+        var pageCache = app.globalData.pageCache, comp = this;
+
+        var modelVal = pageCache.registerModel(comp.data[comp.__modelAttrName], function (n) {
+          comp.setData({
+            value: n
+          });
+        });
+
+        comp.setData({
+          value: modelVal
+        });
+      },
+      handler: function(params){
+        var pageCache = app.globalData.pageCache, comp = this;
+        var modelAttrName = comp.__modelAttrName;
+        var exp = comp.data[modelAttrName];
+        pageCache.updateModel(exp, params.value);
       }
     }
   };
 
-  var handler = {
-    input: defaultHander,
-    textarea: defaultHander,
-    checkbox: {
-      modelName: defaultHander.modelName,
-      modelValue: {
-        // memo: 'model对应对象属性值',
-        type: Object,
-        value: [],
-        observer: function (v, o) {
-          this.setData({
-            checked: v.indexOf(this.data.value) > 0
-          });
-        }
-      }
-    },
-    radio: {
-      modelName: defaultHander.modelName,
-      modelValue: {
-        // memo: 'model对应对象属性值',
-        type: String,
-        value: '',
-        observer: function (v, o) {
-          this.setData({
-            checked: v === this.data.value
-          });
-        }
-      }
-    },
-    select: defaultHander
-  };
+  for (var k in models){
 
-  if (handler[opt.formType]){
-    var properties = opt.properties = opt.properties || {};
-    Object.assign(properties, handler[opt.formType]);
+    (function(type){
+      var modelUtil = models[type];
+      var modelAttrName = 'v-model:' + type;
+      properties[modelAttrName] = {
+        type: String,
+        observer: function (v, n) {
+          if (!this.__modelInit) {
+
+            var comp = this;
+            this.__modelAttrName = modelAttrName;
+            this.__modelHandler = function(params){
+              modelUtil.handler.call(comp, params);
+            };
+
+            modelUtil.init.call(this);
+
+            this.__modelInit = false;
+          }
+        }
+      }
+
+    })(k);
+    
   }
 
   
@@ -285,7 +401,6 @@ module.exports = function(tagName){
     Page: function (opt) {
       addPageLifetimes(opt);
       addMethods(opt);
-      bindModelHandler(opt, true);
       Page(opt);
     },
     Component: function (opt) {
@@ -295,9 +410,9 @@ module.exports = function(tagName){
         addGlobalClass: true
       };
       addCompLifetimes(opt);
+      bindModelHandler(opt);
       addValueOberser(opt);
       addMethods(opt);
-      bindModelHandler(opt);
       Component(opt);
     }
   }
