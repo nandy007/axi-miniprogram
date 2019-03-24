@@ -71,27 +71,35 @@ function createPageCache(ctx) {
     setData: function(){
       ctx.setData.apply(ctx, arguments);
     },
-    registerModel: function(exp, cb){
-      var cbs = _models[exp] = _models[exp] || [];
-      cbs.push(cb);
-      return this.getValueFromModel(exp);
+    registerModel: function(modelInfo, cb){
+      var cbs = _models[modelInfo.exp] = _models[modelInfo.exp] || [];
+      modelInfo.cb = cb;
+      cbs.push(modelInfo);
+      return this.getValueFromModel(modelInfo);
     },
-    getValueFromModel: function(exp){
-      var cur, exps = exp.split('.'), e, data = ctx.data;
+    getModelCtx: function (modelInfo){
+      return modelInfo.source ? util.selectById(modelInfo.source) : ctx;
+    },
+    getValueFromModel: function (modelInfo){
+      var cur, exps = modelInfo.exp.split('.'), e, comp = util.getModelCtx(modelInfo), data = comp.data;
       while(e = exps.shift()){
         cur = data[e];
       }
       return cur;
     },
-    updateModel: function(exp, val){
+    updateModel: function (modelInfo, val){
+      var comp = util.getModelCtx(modelInfo);
       var obj = {};
-      obj[exp] = val;
-      ctx.setData(obj, true);
+      obj[modelInfo.exp] = val;
+      comp.setData(obj, true);
     },
-    triggerModelUpdate: function(exp, v){
+    triggerModelUpdate: function (exp, v, comp){
+      comp = comp || ctx;
       var cbs = _models[exp] = _models[exp] || [];
-      cbs.forEach((cb)=>{
-        cb(v);
+      cbs.forEach((info)=>{
+        var target = util.getModelCtx(info);
+        if (target === comp) info.cb && info.cb(v);
+        
       });
     }
   };
@@ -158,8 +166,19 @@ function addCompLifetimes(opt) {
     this.triggerEvent = function (name, params) {
       triggerEvent.apply(this, arguments);
       if (['input', 'blur', 'change'].indexOf(name) > -1) {
-        this.__modelHandler && this.__modelHandler(params||{});
+        this.__modelInfo && this.__modelInfo.handler && this.__modelInfo.handler(params||{});
       }
+    };
+
+    // 重写page的setData
+    var setData = this.setData;
+    this.setData = function (data, noTrigger) {
+      if (!noTrigger) {
+        for (var exp in data) {
+          pageCache.triggerModelUpdate(exp, data[exp], this);
+        }
+      }
+      setData.apply(this, arguments);
     };
 
     created && created.call(this);
@@ -266,7 +285,7 @@ function bindModelHandler(opt){
       init: function(){
         var pageCache = app.globalData.pageCache, comp = this;
 
-        var modelVal = pageCache.registerModel(comp.data[comp.__modelAttrName], function(n){
+        var modelVal = pageCache.registerModel(comp.__modelInfo, function(n){
           comp.setData({
             value: n
           });
@@ -277,17 +296,17 @@ function bindModelHandler(opt){
         });
       },
       handler: function (params){
-        var pageCache = app.globalData.pageCache, comp = this;
-        var modelAttrName = comp.__modelAttrName;
+        var pageCache = app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var modelAttrName = modelInfo.attr;
         var exp = comp.data[modelAttrName];
-        pageCache.updateModel(exp, params.value);
+        pageCache.updateModel(modelInfo, params.value);
       }
     },
     checkbox: {
       init: function(){
         var pageCache = app.globalData.pageCache, comp = this;
 
-        var modelVal = pageCache.registerModel(comp.data[comp.__modelAttrName], function (n) {
+        var modelVal = pageCache.registerModel(comp.__modelInfo, function (n) {
           comp.setData({
             checked: n.indexOf(comp.data.value) > -1
           });
@@ -299,23 +318,23 @@ function bindModelHandler(opt){
         });
       },
       handler: function (params){
-        var pageCache = app.globalData.pageCache, comp = this;
-        var modelAttrName = comp.__modelAttrName;
-        var exp = comp.data[modelAttrName], modelValue = pageCache.getValueFromModel(exp).slice(0);
+        var pageCache = app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var modelAttrName = modelInfo.attr;
+        var exp = comp.data[modelAttrName], modelValue = pageCache.getValueFromModel(modelInfo).slice(0);
         if(params.checked){
           if (modelValue.indexOf(params.value) < 0) modelValue.push(params.value);
         }else{
           var index = modelValue.indexOf(params.value);
           if (index>-1) modelValue.splice(index, 1);
         }
-        pageCache.updateModel(exp, modelValue);
+        pageCache.updateModel(modelInfo, modelValue);
       }
     },
     radio: {
       init: function(){
         var pageCache = app.globalData.pageCache, comp = this;
 
-        var modelVal = pageCache.registerModel(comp.data[comp.__modelAttrName], function (n) {
+        var modelVal = pageCache.registerModel(comp.__modelInfo, function (n) {
           comp.setData({
             checked: n===comp.data.value
           });
@@ -328,18 +347,18 @@ function bindModelHandler(opt){
       handler: function (params){
        
         if(!params.checked) return;
-        var pageCache = app.globalData.pageCache, comp = this;
-        var modelAttrName = comp.__modelAttrName;
+        var pageCache = app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var modelAttrName = modelInfo.attr;
         var exp = comp.data[modelAttrName];
         
-        pageCache.updateModel(exp, params.value);
+        pageCache.updateModel(modelInfo, params.value);
       }
     },
     select: {
       init: function(){
         var pageCache = app.globalData.pageCache, comp = this;
 
-        var modelVal = pageCache.registerModel(comp.data[comp.__modelAttrName], function (n) {
+        var modelVal = pageCache.registerModel(comp.__modelInfo, function (n) {
           comp.setData({
             value: n
           });
@@ -350,10 +369,10 @@ function bindModelHandler(opt){
         });
       },
       handler: function(params){
-        var pageCache = app.globalData.pageCache, comp = this;
-        var modelAttrName = comp.__modelAttrName;
+        var pageCache = app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var modelAttrName = modelInfo.attr;
         var exp = comp.data[modelAttrName];
-        pageCache.updateModel(exp, params.value);
+        pageCache.updateModel(modelInfo, params.value);
       }
     }
   };
@@ -365,19 +384,23 @@ function bindModelHandler(opt){
       var modelAttrName = 'v-model:' + type;
       properties[modelAttrName] = {
         type: String,
-        observer: function (v, n) {
+        observer: function (v, o) {
           if(!v) return;
-          if (!this.__modelInit) {
-
+          if (!this.__modelInfo){
             var comp = this;
-            this.__modelAttrName = modelAttrName;
-            this.__modelHandler = function(params){
-              modelUtil.handler && modelUtil.handler.call(comp, params);
+            var modelInfo = {
+              attr: modelAttrName,
+              get source() {
+                return comp.data.modelFrom;
+              },
+              exp: v,
+              handler: function (params) {
+                modelUtil.handler && modelUtil.handler.call(comp, params);
+              }
             };
+            this.__modelInfo = modelInfo;
 
             modelUtil.init && modelUtil.init.call(this);
-
-            this.__modelInit = false;
           }
         }
       }
@@ -385,7 +408,11 @@ function bindModelHandler(opt){
     })(k);
     
   }
-
+  
+  // modelFrom属性指明该model的值来源，为来源组件的id，若不指定则来源于当前页
+  properties.modelFrom = {
+    type: String
+  };
   
 }
 
