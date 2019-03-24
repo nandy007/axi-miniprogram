@@ -72,12 +72,6 @@ function createPageCache(ctx) {
       ctx.setData.apply(ctx, arguments);
     },
     registerModel: function(exp, cb){
-      // var observers = ctx.observers = ctx.observers || {};
-      // var observer = observers[exp];
-      // observers[exp] = function(v){
-      //   observer && observer.apply(this, arguments);
-      //   cb && cb(v);
-      // };
       var cbs = _models[exp] = _models[exp] || [];
       cbs.push(cb);
       return this.getValueFromModel(exp);
@@ -372,15 +366,16 @@ function bindModelHandler(opt){
       properties[modelAttrName] = {
         type: String,
         observer: function (v, n) {
+          if(!v) return;
           if (!this.__modelInit) {
 
             var comp = this;
             this.__modelAttrName = modelAttrName;
             this.__modelHandler = function(params){
-              modelUtil.handler.call(comp, params);
+              modelUtil.handler && modelUtil.handler.call(comp, params);
             };
 
-            modelUtil.init.call(this);
+            modelUtil.init && modelUtil.init.call(this);
 
             this.__modelInit = false;
           }
