@@ -72,9 +72,11 @@ function createPageCache(ctx) {
       ctx.setData.apply(ctx, arguments);
     },
     registerModel: function(modelInfo, cb){
-      var cbs = _models[modelInfo.exp] = _models[modelInfo.exp] || [];
-      modelInfo.cb = cb;
-      cbs.push(modelInfo);
+      var models = _models[modelInfo.exp] = _models[modelInfo.exp] || [];
+      if (models.indexOf(modelInfo)===-1){
+        modelInfo.cb = cb;
+        models.push(modelInfo);
+      }
       return this.getValueFromModel(modelInfo);
     },
     getModelCtx: function (modelInfo){
@@ -95,10 +97,10 @@ function createPageCache(ctx) {
     },
     triggerModelUpdate: function (exp, v, comp){
       comp = comp || ctx;
-      var cbs = _models[exp] = _models[exp] || [];
-      cbs.forEach((info)=>{
-        var target = util.getModelCtx(info);
-        if (target === comp) info.cb && info.cb(v);
+      var models = _models[exp] = _models[exp] || [];
+      models.forEach((modelInfo)=>{
+        var target = util.getModelCtx(modelInfo);
+        if (target === comp) modelInfo.cb && modelInfo.cb(v);
         
       });
     }
@@ -400,6 +402,8 @@ function bindModelHandler(opt){
             };
             this.__modelInfo = modelInfo;
 
+            this.__modelUtil = modelUtil;
+
             modelUtil.init && modelUtil.init.call(this);
           }
         }
@@ -411,7 +415,14 @@ function bindModelHandler(opt){
   
   // modelFrom属性指明该model的值来源，为来源组件的id，若不指定则来源于当前页
   properties.modelFrom = {
-    type: String
+    type: String,
+    observer: function (v, o) {
+      var modelUtil = this.__modelUtil;
+      if (modelUtil){
+        // 当绑定id变化时，重新注册
+        modelUtil.init && modelUtil.init.call(this);
+      }
+    }
   };
   
 }
