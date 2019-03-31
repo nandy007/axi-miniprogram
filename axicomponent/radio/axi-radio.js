@@ -55,6 +55,7 @@ ComponentWrapper({
    */
   methods: {
     click: function(e){
+      if (this.data.disabled) return;
       if(this.data.checked) return;
       this.setData({
         checked: true

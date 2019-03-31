@@ -1,36 +1,19 @@
 <!--index.wxml-->
 <view class="container">
+<axi-titlebar hideLeftSide="true" title="首页" style="border-bottom-width:1px;border-bottom-color:#ececec;border-bottom-style:solid;"></axi-titlebar>
+<axi-scroll-view style="flex:1;">
+<axi-button is="button" size="default" hoverClass="hoverclass" loading='true' text="按钮"></axi-button>
+<axi-progress percent='30' showInfo='true' fontSize="20" bindactiveend="actived" active="false"></axi-progress>
+<axi-icon type='success' size="55" color=''></axi-icon>
 
-<!-- <view wx:if="{{isShow}}"><checkbox></checkbox></view>
 
-<axi-text  text="333" selectable="true"></axi-text>
-
-<axi-button  size="default" type='warn' loading='true'>按钮</axi-button>
-<axi-progress percent='30' showInfo='true' fontSize="20" bindactiveend="actived" active="false"></axi-progress> -->
-<!-- <axi-icon type='success' size="55px" color=''></axi-icon> -->
-
-<!-- <axi-swiper>
-
-   <swiper-item>
-    <view style='background:red;height:100%;width:100%'></view>
-  </swiper-item>
-
-  <swiper-item>
-    <view style='background:green;height:100%;width:100%'></view>
-  </swiper-item>
-
-  <swiper-item>
-    <view style='background:blue;height:100%;width:100%'></view>
-  </swiper-item>
-</axi-swiper> -->
-
-<!-- <axi-pick-date  fields="day" bindchange="change" bindcancel="cancel">
+<axi-pick-date  fields="day" bindchange="change" bindcancel="cancel">
   
 </axi-pick-date>
 
 <axi-pick-time  fields="day" bindchange="change" bindcancel="cancel">
   
-</axi-pick-time> -->
+</axi-pick-time>
   
 
 
@@ -65,26 +48,12 @@
   <navigator url='../main/main' open-type="navigate"><text>main</text></navigator>
 
 
-  <!-- <text>3333</text> -->
+<axi-image src="https://www.baidu.com/img/baidu_jgylogo3.gif" mode="autoFit"></axi-image>
 
-
-
-
-  <!-- <axi-scroll-view bindscrolltoupper="scrollTop" direction="vertical">
-
-
-    <view hoverClass="hoverclass" style="height:1000px;width:1000px;display:block">
-        
-    </view>
-
-    <view slotClass="column">
-      <text>1111</text><text>2222</text>
-    </view>
-
-  </axi-scroll-view> -->
-
-  <!-- <scroll-view scroll-x="{{scroll}}">
-    <view style='height:300px;width:1000px'>ty</view>
-  </scroll-view> -->
+<axi-image src="https://www.baidu.com/img/baidu_jgylogo3.gif" mode="scaleToFill" style="width:200px;height:30px;"></axi-image>
+<axi-image src="https://www.baidu.com/img/baidu_jgylogo3.gif" mode="aspectFill" style="width:200px;height:30px;"></axi-image>
+<axi-image src="https://www.baidu.com/img/baidu_jgylogo3.gif" mode="aspectFit" style="width:200px;height:30px;"></axi-image>
+</axi-scroll-view>
+  <axi-tabbar list="{{tablist}}" current="{{tabIndex}}" bindchanged="method.tabChange"></axi-tabbar>
 
 </view>

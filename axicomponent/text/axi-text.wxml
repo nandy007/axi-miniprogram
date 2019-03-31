@@ -1,11 +1,11 @@
-<text v-if="{{text}}"
+<text wx:if="{{text}}"
   selectable="{{selectable}}" 
   space="{{space}}"
   class="axi-text">
   {{text}}
 </text>
 
-<rich-text v-else
+<rich-text wx:else
   nodes="{{html}}"
   space="{{space}}">
 </rich-text>

@@ -22,6 +22,9 @@
     "axi-label": "/axicomponent/label/axi-label",
     "axi-input": "/axicomponent/input/axi-input",
     "axi-select": "/axicomponent/picker/axi-select",
-    "axi-switch": "/axicomponent/switch/axi-switch"
+    "axi-switch": "/axicomponent/switch/axi-switch",
+    "axi-image": "/axicomponent/image/axi-image",
+    "axi-titlebar": "/axicomponent/bar/axi-titlebar",
+    "axi-tabbar": "/axicomponent/bar/axi-tabbar"
   }
 }

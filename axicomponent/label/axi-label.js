@@ -27,7 +27,7 @@ ComponentWrapper({
 
       var comp = this.selectById(id);
 
-      if (comp) comp.click && comp.click();
+      comp && !comp.data.disabled && comp.click && comp.click();
     }
   }
 })

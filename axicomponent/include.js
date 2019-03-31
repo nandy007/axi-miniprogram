@@ -273,7 +273,7 @@ function addValueOberser(opt) {
     var observer = property.observer;
 
     if (!observer) return;
-
+  
     property.observer = function() {
       var args = arguments;
       // 延迟触发，确保page的onload先进入

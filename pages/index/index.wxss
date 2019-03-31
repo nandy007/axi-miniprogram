@@ -3,8 +3,10 @@
   height: 100%;
 }
 .hoverclass{
-  background-color: red;
-  color: blue;
+  background-color: blue;
+}
+.hoverclass text{
+  color: #ffffff;
 }
 .column{
   display: flex;

@@ -25,7 +25,8 @@ ComponentWrapper({
    * 组件的初始数据
    */
   data: {
-
+    width: '',
+    height: ''
   },
 
   /**
@@ -36,7 +37,15 @@ ComponentWrapper({
         this.triggerEvent('error', arguments);
     },
     loadFunc: function(e) {
-        this.triggerEvent('load', arguments);
+      var mode = this.data.mode;
+      if (mode ==='autoFit'){
+        var width = e.detail.width, height = e.detail.height;
+        this.setData({
+          width: width,
+          height: height
+        });
+      }
+      this.triggerEvent('load', arguments);
     }
   }
 })

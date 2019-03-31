@@ -34,7 +34,9 @@ PageWrapper({
         title: '标题二'
       }
     ],
-    node: '<span >1111</span>'
+    node: '<span >1111</span>',
+    tabIndex: 1,
+    tablist: [{ text: '组件', iconPath: '/resources/imgs/icon_component.png', selectedIconPath: '/resources/imgs/icon_component_HL.png' }, { text: '接口', iconPath: '/resources/imgs/icon_API.png', selectedIconPath: '/resources/imgs/icon_API_HL.png' }]
   },
   onLoad: function () {
     // console.log(222)

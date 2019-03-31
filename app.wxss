@@ -1,4 +1,5 @@
 /**app.wxss**/
+@import 'axicomponent/icon/font/icon.wxss';
 page {
   width: 100%;
   height: 100%;

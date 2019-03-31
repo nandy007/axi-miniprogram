@@ -6,11 +6,14 @@ ComponentWrapper({
    * 组件的属性列表
    */
   properties: {
-    'size': {
+    'text': {
       type: String
     },
+    'size': {
+      type: String,
+    },
     'type': {
-      type: String
+      type: String,
     },
     'plain': {
       type: Boolean
@@ -19,7 +22,8 @@ ComponentWrapper({
       type: Boolean
     },
     'loading': {
-      type: Boolean
+      type: Boolean,
+      value: false
     },
     'hoverClass': {
       type: String
@@ -28,10 +32,12 @@ ComponentWrapper({
       type: Boolean
     },
     'hoverStartTime':{
-      type: Number
+      type: Number,
+      value: 20
     },
     'hoverStayTime': {
-      type: Number
+      type: Number,
+      value: 70
     }
   },
 

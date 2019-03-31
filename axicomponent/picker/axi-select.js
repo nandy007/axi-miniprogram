@@ -7,7 +7,7 @@ ComponentWrapper({
   properties: {
     'options': {
       // memo: 'select的选项，为对象数组，对象必须包含text和value，为自有属性',
-      type: Object,
+      type: Array,
       value: [],
       observer: function (val) {
         this.setData({
