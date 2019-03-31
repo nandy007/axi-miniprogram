@@ -43,7 +43,7 @@ PageWrapper({
     // })
     // this.data.isShow = true;
     setTimeout(()=>{
-      console.log(this.data.slt)
+      // console.log(this.data.slt)
       this.setData({
         isShow: false,
         switchChecked: false,
@@ -57,7 +57,7 @@ PageWrapper({
           isShow: true
         })
       }, 3000);
-      // console.log(this.selectComponent('#ck'))
+      console.log(this.getValueByName('rd'))
     }, 3000);
 
     

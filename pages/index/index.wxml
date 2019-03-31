@@ -1,7 +1,7 @@
 <!--index.wxml-->
-<axi-view class="container">
+<view class="container">
 
-<!-- <axi-view wx:if="{{isShow}}"><checkbox></checkbox></axi-view>
+<!-- <view wx:if="{{isShow}}"><checkbox></checkbox></view>
 
 <axi-text  text="333" selectable="true"></axi-text>
 
@@ -73,13 +73,13 @@
   <!-- <axi-scroll-view bindscrolltoupper="scrollTop" direction="vertical">
 
 
-    <axi-view hoverClass="hoverclass" style="height:1000px;width:1000px;display:block">
+    <view hoverClass="hoverclass" style="height:1000px;width:1000px;display:block">
         
-    </axi-view>
+    </view>
 
-    <axi-view slotClass="column">
+    <view slotClass="column">
       <text>1111</text><text>2222</text>
-    </axi-view>
+    </view>
 
   </axi-scroll-view> -->
 
@@ -87,4 +87,4 @@
     <view style='height:300px;width:1000px'>ty</view>
   </scroll-view> -->
 
-</axi-view>
+</view>

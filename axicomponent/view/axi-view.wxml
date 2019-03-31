@@ -1,5 +1,0 @@
-<!--axicomponent/view/axi-view.wxml-->
-<view hoverClass="{{hoverClass}}" 
-  hoverStopPropagation="{{hoverStopPropagation}}"
-  hoverStartTime="{{hoverStartTime}}"
-  hoverStayTime="{{hoverStayTime}}" class="slot-class"><slot></slot></view>

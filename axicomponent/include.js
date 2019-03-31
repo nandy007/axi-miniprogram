@@ -20,7 +20,7 @@ function createPageCache(ctx) {
         var index = _names[name].indexOf(comp);
         if (index > -1) _names[name].splice(index, 1);
       } else if (comp){
-        _names[name].push(comp);
+        if (_names[name].indexOf(comp)===-1) _names[name].push(comp);
       } else {
         return (_names[name] || []).slice(0);
       }
@@ -56,7 +56,7 @@ function createPageCache(ctx) {
     selectByName: function(name){
       return util.name(name);
     },
-    selectBySelector: function(selector){
+    selectBySelector: function(selector, isFirst){
       // 先找页面
       var comps = Array.prototype.slice.call(ctx.selectAllComponents(selector));
       // if (!isDeep) return comps; 
@@ -66,7 +66,26 @@ function createPageCache(ctx) {
         comp = all[i].selectAllComponents(selector);
         comps = comps.concat(Array.prototype.slice.call(comp));
       }
-      return comps;
+      return isFirst ? comps[0] : comps;
+    },
+    getValueByName(name) {
+      var comps = this.selectByName(name) || [], rs = '';
+      for(var i=0, len=comps.length;i<len;i++){
+        if (comps[i].data.checked){
+          rs = comps[i].data.value;
+          break;
+        }
+      }
+      return rs;
+    },
+    getValuesByName(name) {
+      var comps = this.selectByName(name) || [], rs = [];
+      for (var i = 0, len = comps.length; i < len; i++) {
+        if (comps[i].data.checked) {
+          rs.push(comps[i].data.value);
+        }
+      }
+      return rs;
     },
     setData: function(){
       ctx.setData.apply(ctx, arguments);
@@ -208,21 +227,15 @@ function getMethods(opt, isPage){
 function addMethods(opt, isPage){
   var methods = getMethods(opt, isPage);
 
-  methods.selectById = function(id){
-    var pageCache = app.globalData.pageCache;
-    var comp = pageCache.selectById(id);
-    return comp;
-  };
-  methods.selectByName = function (name) {
-    var pageCache = app.globalData.pageCache;
-    var comps = pageCache.selectByName();
-    return comps;
-  };
-  methods.selectBySelector = function(selector, isFirst){
-    var pageCache = app.globalData.pageCache;
-    var comps = pageCache.selectBySelector(selector);
-    return isFirst ? comps[0] : comps;
-  };
+  var methodNames = ['selectById', 'selectByName', 'selectBySelector', 'getValueByName', 'getValuesByName'];
+
+  methodNames.forEach((methodName)=>{
+    methods[methodName] = function(){
+      var pageCache = app.globalData.pageCache;
+      return pageCache[methodName].apply(pageCache, arguments);
+    };
+  });
+
   methods.getAttrValue = function(attrName){
     return this.data[attrName];
   };
@@ -236,21 +249,16 @@ function addValueOberser(opt) {
   var nameProperty = properties.name = properties.name || {type: 'String'};
   var nameObserver = nameProperty.observer;
   nameProperty.observer = function(v, o){
-    if (!v) return;
-    var pageCache = app.globalData.pageCache, attr = 'name';
-
-    var vObj = pageCache[attr][v] = pageCache[attr][v] || [],
-      oObj = pageCache[attr][o] || [],
-      index;
-
-    index = oObj.indexOf(this);
-    if (index > -1) {
-      oObj.splice(index, 1);
+    var pageCache = app.globalData.pageCache;
+    if(o){
+      // 删除原缓存
+      pageCache.name(o, this, true);
     }
-    index = vObj.indexOf(this);
-    if (index === -1) {
-      vObj.push(this);
+    if (v){
+      // 添加新缓存
+      pageCache.name(v, this);
     }
+    
     nameObserver && nameObserver.apply(this, arguments);
   };
 
@@ -433,7 +441,7 @@ module.exports = function(tagName){
   return {
     Page: function (opt) {
       addPageLifetimes(opt);
-      addMethods(opt);
+      addMethods(opt, true);
       Page(opt);
     },
     Component: function (opt) {
