@@ -6,7 +6,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "AXI",
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
@@ -25,6 +25,7 @@
     "axi-switch": "/axicomponent/switch/axi-switch",
     "axi-image": "/axicomponent/image/axi-image",
     "axi-titlebar": "/axicomponent/bar/axi-titlebar",
-    "axi-tabbar": "/axicomponent/bar/axi-tabbar"
+    "axi-tabbar": "/axicomponent/bar/axi-tabbar",
+    "axi-textarea": "/axicomponent/textarea/axi-textarea"
   }
 }

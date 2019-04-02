@@ -5,5 +5,5 @@ axi-image > image{
 }
 
 axi-image{
-  display: inline-flex;
+  display: flex;
 }

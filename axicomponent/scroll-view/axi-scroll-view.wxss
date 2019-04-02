@@ -1,7 +1,0 @@
-/* axicomponent/scroll-view/axi-scroll-view.wxss */
-axi-scroll-view{
-  display: flex;
-}
-axi-scroll-view > scroll-view{
-  flex: 1;
-}

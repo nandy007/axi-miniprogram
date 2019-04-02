@@ -1,11 +1,15 @@
 /**app.wxss**/
-@import 'axicomponent/icon/font/icon.wxss';
-page {
-  width: 100%;
-  height: 100%;
-}
 
-view{
-  display: flex;
-  flex-direction: column;
-}
+@import '/axicomponent/bar/axi-tabbar.common.wxss';
+@import '/axicomponent/bar/axi-titlebar.common.wxss';
+@import '/axicomponent/common/css/global.common.wxss';
+@import '/axicomponent/icon/font/icon.common.wxss';
+@import '/axicomponent/image/axi-image.common.wxss';
+@import '/axicomponent/input/axi-input.common.wxss';
+@import '/axicomponent/label/axi-label.common.wxss';
+@import '/axicomponent/picker/axi-pick-date.common.wxss';
+@import '/axicomponent/picker/axi-pick-time.common.wxss';
+@import '/axicomponent/picker/axi-select.common.wxss';
+@import '/axicomponent/scroll-view/axi-scroll-view.common.wxss';
+@import '/axicomponent/view/view.common.wxss';
+@import '/axicomponent/textarea/axi-textarea.common.wxss';

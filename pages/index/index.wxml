@@ -1,21 +1,21 @@
 <!--index.wxml-->
 <view class="container">
-<axi-titlebar hideLeftSide="true" title="首页" style="border-bottom-width:1px;border-bottom-color:#ececec;border-bottom-style:solid;"></axi-titlebar>
+<axi-titlebar hideLeftSide="{{false}}" title="首页" style="border-bottom-width:1px;border-bottom-color:#ececec;border-bottom-style:solid;"></axi-titlebar>
 <axi-scroll-view style="flex:1;">
 <axi-button is="button" size="default" hoverClass="hoverclass" loading='true' text="按钮"></axi-button>
 <axi-progress percent='30' showInfo='true' fontSize="20" bindactiveend="actived" active="false"></axi-progress>
 <axi-icon type='success' size="55" color=''></axi-icon>
 
 
-<axi-pick-date  fields="day" bindchange="change" bindcancel="cancel">
+<axi-pick-date  fields="day" bindchange="change" bindcancel="cancel" placeholder="请选择">
   
 </axi-pick-date>
 
-<axi-pick-time  fields="day" bindchange="change" bindcancel="cancel">
+<axi-pick-time  fields="day" bindchange="change" bindcancel="cancel" placeholder="请选择">
   
 </axi-pick-time>
   
-
+<axi-textarea placeholder='请输入'></axi-textarea>
 
   <axi-input placeholder="请输入" v-model:text="inputText"></axi-input>
 

@@ -8,7 +8,12 @@ ComponentWrapper({
   properties: {
     'title': {
       // memo: '标题内容',
-      type: String
+      type: String,
+      observer: function(n, o){
+        wx.setNavigationBarTitle({
+          title: n
+        });
+      }
     },
     'color': {
       // memo: '标题颜色',

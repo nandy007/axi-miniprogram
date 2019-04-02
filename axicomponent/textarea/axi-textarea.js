@@ -51,12 +51,18 @@ ComponentWrapper({
         this.triggerEvent('focus', arguments);
     },
     blurFunc: function(e) {
+      this.setData({
+        focus: false
+      });
         this.triggerEvent('blur', arguments);
     },
     linechangeFunc: function(e) {
         this.triggerEvent('linechange', arguments);
     },
     inputFunc: function(e) {
+        this.setData({
+          value: e.detail.value
+        });
         this.triggerEvent('input', arguments);
     },
     confirmFunc: function(e) {

@@ -1,8 +1,9 @@
 <!--axicomponent/textarea/axi-textarea.wxml-->
-<textarea value="{{value}}" 
+<textarea wx:if="{{focus}}" value="{{value}}" 
   placeholder="{{placeholder}}"
   disabled="{{disabled}}"
   maxlength="{{maxlength}}"
-  placeholder-style="{{placeholderColor}}"
+  placeholder-style="color:{{placeholderColor}};"
   auto-height="{{autoHeight}}"
   focus="{{focus}}" bindblur="blurFunc" bindfocus="focusFunc" bindlinechange="linechangeFunc" bindinput="inputFunc" bindconfirm="confirmFunc"></textarea>
+<text wx:else catchtap="click" style="color:{{value?'':placeholderColor}};">{{value||placeholder}}</text>
