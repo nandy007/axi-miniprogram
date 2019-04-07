@@ -27,7 +27,7 @@
   content: "\e602";
 }
 
-.axi-icon-Warning:before {
+.axi-icon-warning:before {
   content: "\e603";
 }
 

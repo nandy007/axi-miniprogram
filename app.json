@@ -26,6 +26,7 @@
     "axi-image": "/axicomponent/image/axi-image",
     "axi-titlebar": "/axicomponent/bar/axi-titlebar",
     "axi-tabbar": "/axicomponent/bar/axi-tabbar",
-    "axi-textarea": "/axicomponent/textarea/axi-textarea"
+    "axi-textarea": "/axicomponent/textarea/axi-textarea",
+    "axi-refresh": "/axicomponent/refresh/axi-refresh"
   }
 }

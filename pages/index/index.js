@@ -81,5 +81,10 @@ PageWrapper({
   },
   cancel: function(e){
     console.log(e)
+  },
+  pulldown: function(e){
+    console.log(222)
+    setTimeout(() => { e.detail.refresh(); }, 1000)
+    
   }
 })
