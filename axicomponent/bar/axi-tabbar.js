@@ -1,5 +1,7 @@
 // axicomponent/bar/axi-tabbar.js
-Component({
+const ComponentWrapper = require('../include.js')('axi-tabbar').Component;
+
+ComponentWrapper({
   /**
    * 组件的属性列表
    */

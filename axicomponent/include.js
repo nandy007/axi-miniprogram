@@ -1,6 +1,9 @@
 
-const app = getApp();
-
+const util = {
+  get app(){
+    return getApp();
+  }
+};
 
 function delay(cb){
   var delayTime = 50;
@@ -131,7 +134,7 @@ function createPageCache(ctx) {
 function addPageLifetimes(opt) {
   var onLoad = opt.onLoad;
   opt.onLoad = function() {
-    var pageCache = this.pageCache = app.globalData.pageCache = createPageCache(this);
+    var pageCache = this.pageCache = util.app.globalData.pageCache = createPageCache(this);
     
     // 重写page的setData
     var setData = this.setData;
@@ -151,7 +154,7 @@ function addPageLifetimes(opt) {
   events.forEach((name)=>{
     var func = events[name];
     opt[name] = function(){
-      app.globalData.pageCache = this.pageCache;
+      util.app.globalData.pageCache = this.pageCache;
       func && func.apply(this, arguments);
     }
   });
@@ -161,7 +164,7 @@ function addPageLifetimes(opt) {
 function addCompLifetimes(opt) {
   var detached = opt.detached;
   opt.detached = function() {
-    var pageCache = app.globalData.pageCache;
+    var pageCache = util.app.globalData.pageCache;
 
     // 将组件从names缓存中清除
     var attrs = ['name'];
@@ -179,7 +182,7 @@ function addCompLifetimes(opt) {
 
   var created = opt.created;
   opt.created = function(){
-    var pageCache = app.globalData.pageCache;
+    var pageCache = util.app.globalData.pageCache;
     pageCache.all(this);
     
     // 重写comp的triggerEvent
@@ -231,7 +234,7 @@ function addMethods(opt, isPage){
 
   methodNames.forEach((methodName)=>{
     methods[methodName] = function(){
-      var pageCache = app.globalData.pageCache;
+      var pageCache = util.app.globalData.pageCache;
       return pageCache[methodName].apply(pageCache, arguments);
     };
   });
@@ -249,7 +252,7 @@ function addValueOberser(opt) {
   var nameProperty = properties.name = properties.name || {type: 'String'};
   var nameObserver = nameProperty.observer;
   nameProperty.observer = function(v, o){
-    var pageCache = app.globalData.pageCache;
+    var pageCache = util.app.globalData.pageCache;
     if(o){
       // 删除原缓存
       pageCache.name(o, this, true);
@@ -293,7 +296,7 @@ function bindModelHandler(opt){
   var models = {
     text: {
       init: function(){
-        var pageCache = app.globalData.pageCache, comp = this;
+        var pageCache = util.app.globalData.pageCache, comp = this;
 
         var modelVal = pageCache.registerModel(comp.__modelInfo, function(n){
           comp.setData({
@@ -306,7 +309,7 @@ function bindModelHandler(opt){
         });
       },
       handler: function (params){
-        var pageCache = app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
         var modelAttrName = modelInfo.attr;
         var exp = comp.data[modelAttrName];
         pageCache.updateModel(modelInfo, params.value);
@@ -314,7 +317,7 @@ function bindModelHandler(opt){
     },
     checkbox: {
       init: function(){
-        var pageCache = app.globalData.pageCache, comp = this;
+        var pageCache = util.app.globalData.pageCache, comp = this;
 
         var modelVal = pageCache.registerModel(comp.__modelInfo, function (n) {
           comp.setData({
@@ -328,7 +331,7 @@ function bindModelHandler(opt){
         });
       },
       handler: function (params){
-        var pageCache = app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
         var modelAttrName = modelInfo.attr;
         var exp = comp.data[modelAttrName], modelValue = pageCache.getValueFromModel(modelInfo).slice(0);
         if(params.checked){
@@ -342,7 +345,7 @@ function bindModelHandler(opt){
     },
     radio: {
       init: function(){
-        var pageCache = app.globalData.pageCache, comp = this;
+        var pageCache = util.app.globalData.pageCache, comp = this;
 
         var modelVal = pageCache.registerModel(comp.__modelInfo, function (n) {
           comp.setData({
@@ -357,7 +360,7 @@ function bindModelHandler(opt){
       handler: function (params){
        
         if(!params.checked) return;
-        var pageCache = app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
         var modelAttrName = modelInfo.attr;
         var exp = comp.data[modelAttrName];
         
@@ -366,7 +369,7 @@ function bindModelHandler(opt){
     },
     select: {
       init: function(){
-        var pageCache = app.globalData.pageCache, comp = this;
+        var pageCache = util.app.globalData.pageCache, comp = this;
 
         var modelVal = pageCache.registerModel(comp.__modelInfo, function (n) {
           comp.setData({
@@ -379,7 +382,7 @@ function bindModelHandler(opt){
         });
       },
       handler: function(params){
-        var pageCache = app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
         var modelAttrName = modelInfo.attr;
         var exp = comp.data[modelAttrName];
         pageCache.updateModel(modelInfo, params.value);
