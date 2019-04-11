@@ -31,8 +31,10 @@ ComponentWrapper({
       type: Number,
       value: 0,
       observer: function (val) {
-        if (this.curIndex === val) return;
-        this.curIndex = val;
+        if (this.data.curIndex === val) return;
+        this.setData({
+          curIndex: val
+        });
         var arr = [];
         this.setItems(arr);
         this.setData({
@@ -59,7 +61,8 @@ ComponentWrapper({
    * 组件的初始数据
    */
   data: {
-    tablist: []
+    tablist: [],
+    curIndex: 0
   },
 
   /**
@@ -68,13 +71,13 @@ ComponentWrapper({
   methods: {
     selectItem: function(e){
       var index = e.currentTarget.dataset.index;
-      if (this.curIndex === index) return;
+      if (this.data.curIndex === index) return;
       this.setData({
         current: index
       });
     },
     setItems: function(arr){
-      var curIndex = this.curIndex;
+      var curIndex = this.data.curIndex || 0;
 
       var ls = this.__listData || [];
 
