@@ -25,7 +25,7 @@
 
   <axi-pick-time placeholder="请选择"></axi-pick-time>
 
-  <axi-switch checked="{{switchChecked}}"></axi-switch>
+  <axi-switch v-model:switch="switchChecked"></axi-switch>
 
   <axi-label for="ck1">
     <axi-checkbox id="ck1" v-model:checkbox="cks" value="1" color="red" bindchange="change"></axi-checkbox>

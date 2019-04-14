@@ -311,7 +311,7 @@ function bindModelHandler(opt){
       handler: function (params){
         var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
         var modelAttrName = modelInfo.attr;
-        var exp = comp.data[modelAttrName];
+        // var exp = comp.data[modelAttrName];
         pageCache.updateModel(modelInfo, params.value);
       }
     },
@@ -333,7 +333,8 @@ function bindModelHandler(opt){
       handler: function (params){
         var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
         var modelAttrName = modelInfo.attr;
-        var exp = comp.data[modelAttrName], modelValue = pageCache.getValueFromModel(modelInfo).slice(0);
+        // var exp = comp.data[modelAttrName];
+        var modelValue = pageCache.getValueFromModel(modelInfo).slice(0);
         if(params.checked){
           if (modelValue.indexOf(params.value) < 0) modelValue.push(params.value);
         }else{
@@ -362,7 +363,7 @@ function bindModelHandler(opt){
         if(!params.checked) return;
         var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
         var modelAttrName = modelInfo.attr;
-        var exp = comp.data[modelAttrName];
+        // var exp = comp.data[modelAttrName];
         
         pageCache.updateModel(modelInfo, params.value);
       }
@@ -384,7 +385,28 @@ function bindModelHandler(opt){
       handler: function(params){
         var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
         var modelAttrName = modelInfo.attr;
-        var exp = comp.data[modelAttrName];
+        // var exp = comp.data[modelAttrName];
+        pageCache.updateModel(modelInfo, params.value);
+      }
+    },
+    'switch': {
+      init: function () {
+        var pageCache = util.app.globalData.pageCache, comp = this;
+
+        var modelVal = pageCache.registerModel(comp.__modelInfo, function (n) {
+          comp.setData({
+            checked: !!n
+          });
+        });
+
+        comp.setData({
+          checked: !!modelVal
+        });
+      },
+      handler: function (params) {
+        var pageCache = util.app.globalData.pageCache, comp = this, modelInfo = comp.__modelInfo;
+        var modelAttrName = modelInfo.attr;
+        // var exp = comp.data[modelAttrName];
         pageCache.updateModel(modelInfo, params.value);
       }
     }
