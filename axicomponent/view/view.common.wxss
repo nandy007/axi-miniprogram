@@ -3,4 +3,5 @@ view{
     flex-direction: column;
     position: relative;
     box-sizing: border-box;
+    text-align: left;
 }
