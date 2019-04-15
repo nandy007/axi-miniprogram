@@ -7,4 +7,4 @@
   hoverClass="{{hoverClass}}"
   hoverStopPropagation="{{hoverStopPropagation}}"
   hoverStartTime="{{hoverStartTime}}"
-  hoverStayTime="{{hoverStayTime}}" class="slot-class"><text>{{text}}</text></button>
+  hoverStayTime="{{hoverStayTime}}" class="slot-class"><text style="opacity:{{opacity}}">{{text}}</text></button>

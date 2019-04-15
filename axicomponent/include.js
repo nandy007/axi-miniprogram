@@ -105,9 +105,9 @@ function createPageCache(ctx) {
       return modelInfo.source ? util.selectById(modelInfo.source) : ctx;
     },
     getValueFromModel: function (modelInfo){
-      var cur, exps = modelInfo.exp.split('.'), e, comp = util.getModelCtx(modelInfo), data = comp.data;
+      var exps = modelInfo.exp.split('.'), e, comp = util.getModelCtx(modelInfo), data = comp.data, cur;
       while(e = exps.shift()){
-        cur = data[e];
+        cur = (cur||data)[e];
       }
       return cur;
     },

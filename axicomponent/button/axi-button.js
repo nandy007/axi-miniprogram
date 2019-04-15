@@ -19,7 +19,12 @@ ComponentWrapper({
       type: Boolean
     },
     'disabled': {
-      type: Boolean
+      type: Boolean,
+      observer: function(v){
+        this.setData({
+          opacity: v ? 0.3 : 1
+        });
+      }
     },
     'loading': {
       type: Boolean,
@@ -45,7 +50,7 @@ ComponentWrapper({
    * 组件的初始数据
    */
   data: {
-    
+    opacity: 1
   },
 
   /**
