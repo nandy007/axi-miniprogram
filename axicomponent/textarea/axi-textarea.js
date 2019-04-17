@@ -7,32 +7,32 @@ ComponentWrapper({
    */
   properties: {
     'value': {
-        // memo: '输入框的初始内容',
-        type: String
+      // memo: '输入框的初始内容',
+      type: String
     },
     'placeholder': {
-        // memo: '输入框为空时占位符',
-        type: String
+      // memo: '输入框为空时占位符',
+      type: String
     },
     'placeholderColor': {
-        // memo: '输入框为空时占位符文字颜色，自定义独有',
-        type: String
+      // memo: '输入框为空时占位符文字颜色，自定义独有',
+      type: String
     },
     'disabled': {
-        // memo: '是否禁用',
-        type: Boolean
+      // memo: '是否禁用',
+      type: Boolean
     },
     'maxlength': {
-        // memo: '最大输入长度，设置为 -1 的时候不限制最大长度',
-        type: Number
+      // memo: '最大输入长度，设置为 -1 的时候不限制最大长度',
+      type: Number
     },
     'autoHeight': {
-        // memo: '是否自动增高，设置auto-height时，style.height不生效',
-        type: Boolean
+      // memo: '是否自动增高，设置auto-height时，style.height不生效',
+      type: Boolean
     },
     'focus': {
-        // memo: '获取焦点',
-        type: Boolean
+      // memo: '获取焦点',
+      type: Boolean
     }
   },
 
@@ -47,26 +47,26 @@ ComponentWrapper({
    * 组件的方法列表
    */
   methods: {
-    focusFunc: function(e) {
-        this.triggerEvent('focus', arguments);
+    focusFunc: function (e) {
+      this.triggerEvent('focus', e.detail);
     },
-    blurFunc: function(e) {
+    blurFunc: function (e) {
       this.setData({
         focus: false
       });
-        this.triggerEvent('blur', arguments);
+      this.triggerEvent('blur', e.detail);
     },
-    linechangeFunc: function(e) {
-        this.triggerEvent('linechange', arguments);
+    linechangeFunc: function (e) {
+      this.triggerEvent('linechange', e.detail);
     },
-    inputFunc: function(e) {
-        this.setData({
-          value: e.detail.value
-        });
-        this.triggerEvent('input', arguments);
+    inputFunc: function (e) {
+      this.setData({
+        value: e.detail.value
+      });
+      this.triggerEvent('input', e.detail);
     },
-    confirmFunc: function(e) {
-        this.triggerEvent('confirm', arguments);
+    confirmFunc: function (e) {
+      this.triggerEvent('confirm', e.detail);
     },
     click: function () {
       this.setData({

@@ -14,13 +14,16 @@ ComponentWrapper({
     },
     'type': {
       type: String,
+      observer: function (n) {
+        this.setTextColor();
+      }
     },
     'plain': {
       type: Boolean
     },
     'disabled': {
       type: Boolean,
-      observer: function(v){
+      observer: function (v) {
         this.setData({
           opacity: v ? 0.3 : 1
         });
@@ -36,7 +39,7 @@ ComponentWrapper({
     'hoverStopPropagation': {
       type: Boolean
     },
-    'hoverStartTime':{
+    'hoverStartTime': {
       type: Number,
       value: 20
     },
@@ -46,11 +49,16 @@ ComponentWrapper({
     }
   },
 
+  created: function () {
+    this.setTextColor();
+  },
+
   /**
    * 组件的初始数据
    */
   data: {
-    opacity: 1
+    opacity: 1,
+    textColor: ''
   },
 
   /**
@@ -60,5 +68,13 @@ ComponentWrapper({
     // toDo: function(){
 
     // }
+    setTextColor: function () {
+      var type = this.data.type;
+      if (!type || type === 'default') {
+        this.setData({
+          textColor: '#000000'
+        });
+      }
+    }
   }
 })

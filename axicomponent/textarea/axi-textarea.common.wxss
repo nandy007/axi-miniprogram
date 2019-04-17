@@ -3,7 +3,7 @@
 
 axi-textarea {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 axi-textarea > text{
@@ -13,5 +13,5 @@ axi-textarea > text{
 }
 
 axi-textarea > textarea{
-  width: 100%;
+  flex: 1;
 }

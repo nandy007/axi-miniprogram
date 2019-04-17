@@ -125,6 +125,23 @@ function createPageCache(ctx) {
         if (target === comp) modelInfo.cb && modelInfo.cb(v);
         
       });
+    },
+    handlerObservers: function (ctx, keyArr){
+      if (keyArr.length === 0) return;
+      var observers = ctx.observers;
+      if (!observers) return;
+      for (var k in observers) {
+        var ks = k.replace(/ /g, '').split(','), flag = false;
+        for (var i = 0, len = keyArr.length; i < len; i++) {
+          if (ks.indexOf(keyArr[i]) > -1) {
+            flag = true;
+            break;
+          }
+        }
+        if (flag) {
+          observers[k].apply(ctx);
+        }
+      }
     }
   };
 
@@ -139,12 +156,13 @@ function addPageLifetimes(opt) {
     // 重写page的setData
     var setData = this.setData;
     this.setData = function (data, noTrigger) {
-      if (!noTrigger){
-        for (var exp in data) {
-          pageCache.triggerModelUpdate(exp, data[exp]);
-        }
+      var keyArr = [];
+      for (var exp in data) {
+        keyArr.push(exp);
+        if (!noTrigger) pageCache.triggerModelUpdate(exp, data[exp]);
       }
       setData.apply(this, arguments);
+      if (keyArr.length>0) pageCache.handlerObservers(this, keyArr);
     };
 
     onLoad && onLoad.call(this);
