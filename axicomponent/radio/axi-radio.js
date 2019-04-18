@@ -4,7 +4,7 @@ const app = getApp();
 function common(){
   
   var name = this.data.name;
-  var comps = app.globalData.pageCache.selectByName(name) || [];
+  var comps = app.globalData.__framework.pageCache.selectByName(name) || [];
 
   for(var i=0, len=comps.length;i<len;i++){
     var comp = comps[i];

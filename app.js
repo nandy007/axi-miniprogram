@@ -35,6 +35,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    pageCache: null
+    __framework: {
+      pageCache: null
+    }
   }
 })
