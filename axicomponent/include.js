@@ -245,6 +245,17 @@ function getMethods(opt, isPage) {
   var methods = isPage ? opt : (function () {
     return opt.methods = opt.methods || {};
   })();
+  if (isPage && opt.methods) {
+    for (var k in opt.methods) {
+      (function (k) {
+        var old = opt[k];
+        opt[k] = function () {
+          old && old.apply(this, arguments);
+          return opt.methods[k].apply(this, arguments);
+        };
+      })(k);
+    }
+  }
   return methods;
 }
 
