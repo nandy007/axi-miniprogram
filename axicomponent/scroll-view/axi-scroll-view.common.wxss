@@ -12,3 +12,8 @@ axi-scroll-view > scroll-view{
   left: 0;
   right: 0;
 }
+axi-scroll-view ::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+}
