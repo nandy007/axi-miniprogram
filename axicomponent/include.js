@@ -274,26 +274,6 @@ function addMethods(opt, absolutePath, isPage){
   methods.getAttrValue = function(attrName){
     return this.data[attrName];
   };
-
-  // 某个地址转为相对的绝对地址
-  methods.getAbsolute = function(url){
-    if(url.indexOf('/')===0) return url;
-    var urls = url.split('/');
-    var pageUrl = absolutePath, pages = pageUrl.split('/');
-    pages.pop(); // 去掉同级
-    var arr = [], cur;
-    while (cur = urls.shift()){
-    	if(cur==='.'){
-
-       	}else if(cur==='..'){
-        	pages.pop();
-        }else{
-          arr.push(cur);
-        }
-    }
-    var arr = pages.concat(arr);
-    return arr.join('/');
-  };
 }
 
 function addValueOberser(opt) {
@@ -515,23 +495,47 @@ function bindModelHandler(opt){
 
 
 module.exports = function(tagName, absolutePath){
-  return {
-    Page: function (opt) {
-      addPageLifetimes(opt);
-      addMethods(opt, absolutePath, true);
-      Page(opt);
-    },
-    Component: function (opt) {
-      opt.tagName = tagName;
-      opt.externalClasses = ['slot-class'];
-      opt.options = {
-        addGlobalClass: true
-      };
-      addCompLifetimes(opt);
-      bindModelHandler(opt);
-      addValueOberser(opt);
-      addMethods(opt, absolutePath);
-      Component(opt);
+  // 某个地址转为相对的绝对地址
+  var getAbsolute = function(url){
+    if(url.indexOf('/')===0) return url;
+    var urls = url.split('/');
+    var pageUrl = absolutePath, pages = pageUrl.split('/');
+    pages.pop(); // 去掉同级
+    var arr = [], cur;
+    while (cur = urls.shift()){
+    	if(cur==='.'){
+
+       	}else if(cur==='..'){
+        	pages.pop();
+        }else{
+          arr.push(cur);
+        }
     }
-  }
+    var arr = pages.concat(arr);
+    return arr.join('/');
+  };
+  var _Page = function (opt) {
+    addPageLifetimes(opt);
+    addMethods(opt, absolutePath, true);
+    Page(opt);
+  };
+  var _Comp = function (opt) {
+    opt.tagName = tagName;
+    opt.externalClasses = ['slot-class'];
+    opt.options = {
+      addGlobalClass: true
+    };
+    addCompLifetimes(opt);
+    bindModelHandler(opt);
+    addValueOberser(opt);
+    addMethods(opt, absolutePath);
+    Component(opt);
+  };
+
+  _Page.getAbsolute = _Comp.getAbsolute = getAbsolute;
+
+  return {
+    Page: _Page,
+    Component: _Comp
+  };
 };
