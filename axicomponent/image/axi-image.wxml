@@ -1,4 +1,4 @@
 <!--axicomponent/image/axi-image.wxml-->
 <image mode="{{mode}}"
- src="{{src}}"
+ src="{{trueSrc}}"
 binderror="errorFunc" bindload="loadFunc" style="width: {{width}}px; height: {{height}}px"></image>

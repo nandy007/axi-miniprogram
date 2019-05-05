@@ -8,17 +8,22 @@ ComponentWrapper({
   properties: {
     'src': {
       // memo: '图片地址',
-      type: String
+      type: String,
+      observer: function (v) {
+        var rs = v || '';
+        if (rs.indexOf('http://') !== 0 && rs.indexOf('https://') !== 0) {
+          rs = v ? ComponentWrapper.getAbsolute(v) : '';
+        }
+        console.log(rs)
+        this.setData({
+          trueSrc: rs
+        });
+      }
     },
     'mode': {
       // memo: '图片裁剪、缩放的模式',
       type: String
-    },
-    'src': {
-      // memo: '图片地址',
-      type: String
-    },
-
+    }
   },
 
   /**
@@ -26,19 +31,20 @@ ComponentWrapper({
    */
   data: {
     width: '',
-    height: ''
+    height: '',
+    trueSrc: ''
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    errorFunc: function(e) {
-        this.triggerEvent('error', arguments);
+    errorFunc: function (e) {
+      this.triggerEvent('error', arguments);
     },
-    loadFunc: function(e) {
+    loadFunc: function (e) {
       var mode = this.data.mode;
-      if (mode ==='autoFit'){
+      if (mode === 'autoFit') {
         var width = e.detail.width, height = e.detail.height;
         this.setData({
           width: width,
