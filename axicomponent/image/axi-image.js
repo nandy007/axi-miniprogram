@@ -14,7 +14,7 @@ ComponentWrapper({
         if (rs.indexOf('http://') !== 0 && rs.indexOf('https://') !== 0) {
           rs = v ? ComponentWrapper.getAbsolute(v) : '';
         }
-        console.log(rs)
+        // console.log(rs)
         this.setData({
           trueSrc: rs
         });
