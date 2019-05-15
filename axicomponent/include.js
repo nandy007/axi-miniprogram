@@ -49,7 +49,7 @@ function createPageCache(ctx, pageParams, absolutePath) {
       var comp = ctx.selectComponent('#' + id);
       if (comp) return comp;
       // 页面没有则从缓存里找
-      if (idCache[id]) return idCache[id];
+      if (_idCache[id]) return _idCache[id];
       // 缓存没有则从所有组件找
       var all = util.all();
       for (var i = 0, len = all.length; i < len; i++) {
