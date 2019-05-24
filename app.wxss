@@ -14,3 +14,4 @@
 @import '/axicomponent/view/view.common.wxss';
 @import '/axicomponent/textarea/axi-textarea.common.wxss';
 @import '/axicomponent/refresh/refresh-view.common.wxss';
+@import '/axicomponent/rich-text/axi-rich-text.common.wxss';

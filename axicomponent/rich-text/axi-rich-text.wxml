@@ -1,0 +1,2 @@
+<!--axicomponent/rich-text/axi-rich-text.wxml-->
+<rich-text nodes="{{nodes}}"></rich-text>

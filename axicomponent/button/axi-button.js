@@ -70,9 +70,9 @@ ComponentWrapper({
     // }
     setTextColor: function () {
       var type = this.data.type;
-      if (!type || type === 'default') {
+      if (type && type !== 'default') {
         this.setData({
-          textColor: '#000000'
+          textColor: '#ffffff'
         });
       }
     }

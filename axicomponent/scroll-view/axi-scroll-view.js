@@ -57,13 +57,13 @@ ComponentWrapper({
    */
   methods: {
     scrolltoupperFunc(e){
-      this.triggerEvent('scrolltoupper', arguments);
+      this.triggerEvent('scrolltoupper', e.detail);
     },
     scrolltolowerFunc(e){
-      this.triggerEvent('scrolltolower', arguments);
+      this.triggerEvent('scrolltolower', e.detail);
     },
     scrollFunc(e){
-      this.triggerEvent('scroll', arguments);
+      this.triggerEvent('scroll', e.detail);
     }
   }
 })

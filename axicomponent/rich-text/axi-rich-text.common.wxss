@@ -1,0 +1,4 @@
+/* axicomponent/rich-text/axi-rich-text.wxss */
+axi-rich-text{
+  display: inline-flex;
+}

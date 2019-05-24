@@ -27,7 +27,8 @@
     "axi-titlebar": "/axicomponent/bar/axi-titlebar",
     "axi-tabbar": "/axicomponent/bar/axi-tabbar",
     "axi-textarea": "/axicomponent/textarea/axi-textarea",
-    "axi-refresh": "/axicomponent/refresh/axi-refresh"
+    "axi-refresh": "/axicomponent/refresh/axi-refresh",
+    "axi-rich-text": "/axicomponent/rich-text/axi-rich-text"
   },
   "sitemapLocation": "sitemap.json"
 }

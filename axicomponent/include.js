@@ -173,7 +173,8 @@ function addPageLifetimes(opt, absolutePath) {
 
     onLoad && onLoad.call(this);
   };
-  var events = ['onShow', 'onUnload'];
+  // var events = ['onShow', 'onUnload'];
+  var events = ['onShow'];
 
   events.forEach((name) => {
     var func = events[name];
@@ -276,6 +277,13 @@ function addMethods(opt, absolutePath, isPage) {
 
   methods.getAttrValue = function (attrName) {
     return this.data[attrName];
+  };
+
+  // 屏蔽支付宝小程序的rich-text设置nodes
+  methods.setNodes = function (name, nodes) {
+    const data = {};
+    data[name] = nodes;
+    this.setData(data);
   };
 }
 

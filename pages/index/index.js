@@ -34,7 +34,7 @@ PageWrapper({
         title: '标题二'
       }
     ],
-    node: '<span >1111</span>',
+    node: '',
     tabIndex: 1,
     tablist: [{ text: '组件', iconPath: '/resources/imgs/icon_component.png', selectedIconPath: '/resources/imgs/icon_component_HL.png' }, { text: '接口', iconPath: '/resources/imgs/icon_API.png', selectedIconPath: '/resources/imgs/icon_API_HL.png' }]
   },
@@ -52,6 +52,8 @@ PageWrapper({
         inputText: '新输入内容'
       });
 
+      this.setNodes('node', '<span >1111</span>');
+      // console.log(this.setNodes)
       // this.data.inputText = '33333'
 
       setTimeout(() => {
