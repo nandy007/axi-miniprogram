@@ -1,6 +1,11 @@
 // components/RefreshView/axi-refresh.js
 const ComponentWrapper = require('../include.js')('axi-radio').Component;
 
+var idIndex = 0;
+function getRefreshId(){
+  return '__refresh_id_' + (idIndex++) + '__';
+}
+
 ComponentWrapper({
   /**
    * 组件的属性列表
@@ -13,13 +18,16 @@ ComponentWrapper({
    * 组件的初始数据
    */
   data: {
-
+    refreshId: ''
   },
 
   created: function(){
-    
+    const id = getRefreshId();
+    this.setData({
+      refreshId: id
+    });
     // 刷新组件
-    this.refreshView = this.selectComponent("#refreshView");
+    this.refreshView = this.selectComponent("#"+id);
     // console.log(this.refreshView)
   },
 
