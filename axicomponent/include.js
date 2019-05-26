@@ -279,6 +279,26 @@ function addMethods(opt, absolutePath, isPage) {
     return this.data[attrName];
   };
 
+  methods.getAbsolute = function (url) {
+    if (url.indexOf('/') === 0) return url;
+    var urls = url.split('/');
+    var pageCache = util.app.globalData.__framework.pageCache;
+    var pageUrl = absolutePath || pageCache.getPagePath(), pages = pageUrl.split('/');
+    pages.pop(); // 去掉同级
+    var arr = [], cur;
+    while (cur = urls.shift()) {
+      if (cur === '.') {
+
+      } else if (cur === '..') {
+        pages.pop();
+      } else {
+        arr.push(cur);
+      }
+    }
+    var arr = pages.concat(arr);
+    return arr.join('/');
+  };
+
   // 屏蔽支付宝小程序的rich-text设置nodes
   methods.setNodes = function (name, nodes) {
     const data = {};
