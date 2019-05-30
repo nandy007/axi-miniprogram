@@ -37,10 +37,12 @@ ComponentWrapper({
   methods: {
     //触摸开始
     handletouchstart: function (event) {
+      // console.log(4444);
       this.refreshView.handletouchstart(event)
     },
     //触摸移动
     handletouchmove: function (event) {
+      // console.log(3333);
       this.refreshView.handletouchmove(event)
     },
     //触摸结束

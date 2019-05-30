@@ -1,7 +1,8 @@
 <!--components/RefreshView/axi-refresh.wxml-->
+<view  ontouchstart='handletouchstart' catchtouchmove='handletouchmove' catchtouchend='handletouchend' catchtouchcancel='handletouchcancel' style="width: 100%;hight:100%;">
 <scroll-view scroll-y="true" bindscroll="onScroll" bindscrolltolower="onScrollLower" style="width: 100%; position:absolute;top:0;right:0;bottom:0;left:0;">
   <refresh-view id='{{refreshId}}' bind:onRefresh="onPullDownRefresh" />
-  <view class="refresh-container" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove' bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'>
+  <view class="refresh-container">
     <view class="refresh-content slot-class"><slot></slot></view>
     <view class='refresh-layout refresh-layout-bottom'>
       <view class="refresh-status refresh-loading"></view>
@@ -9,3 +10,4 @@
     </view>
   </view>
 </scroll-view>
+</view>
